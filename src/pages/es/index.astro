@@ -1,0 +1,279 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import Link from "@components/Link.astro";
+import { dateRange } from "@lib/utils";
+import { SITE, HOME, SOCIALS } from "@consts";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+
+const projects = (await getCollection(`projects`))
+  .filter(project => !project.data.draft && project.id.startsWith(`${lang}/`))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+
+const allprojects = (await getCollection("projects"))
+    .filter((project) => !project.data.draft && project.id.startsWith(`${lang}/`))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allwork = (await getCollection("work")).sort(
+    (a, b) =>
+        new Date(b.data.dateStart).valueOf() -
+        new Date(a.data.dateStart).valueOf(),
+).filter((work) => work.id.startsWith(`${lang}/`));
+
+const work = await Promise.all(
+    allwork.map(async (item) => {
+        const { Content } = await item.render();
+        return { ...item, Content };
+    }),
+);
+
+const alldegrees = (await getCollection("degree")).sort(
+    (a, b) =>
+        new Date(b.data.dateStart).valueOf() -
+        new Date(a.data.dateStart).valueOf(),
+).filter((dregree) => dregree.id.startsWith(`${lang}/`));
+
+const degree = await Promise.all(
+    alldegrees.map(async (item) => {
+        const { Content } = await item.render();
+        return { ...item, Content };
+    }),
+);
+---
+
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+    <Container>
+        <div class="flex items-center space-x-12 space-y-8">
+            <img
+                src={"../_profile.png"}
+                alt="Profile Picture"
+                class="rounded-full w-40 h-40 object-cover"
+            />
+            <div class="flex flex-col justify-center space-y-2 yes-print">
+                <div class="space-y-1">
+                    <h4 class="animate font-semibold text-black dark:text-white">
+                        Adria Hervas Arocas
+                    </h4>
+                    <p class="animate">Unreal Engine Developer</p>
+                </div>
+                <div class="mt-2">
+                    <p class="text-sm opacity-87">Valencia, España</p>
+                    <p class="text-sm opacity-87">https://adriahervas.com</p>
+                </div>
+            </div>
+            <div class="flex flex-col justify-center space-y-2 no-print">
+                <div class="space-y-1">
+                    <h4 class="animate font-semibold text-black dark:text-white">
+                        Hola, soy Adria
+                    </h4>
+                    <p class="animate text-black dark:text-white">
+                        Unreal Engine Developer 🕹
+                    </p>
+                    <button
+                        onclick="window.print();"
+                        class="animate bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-1 px-3 rounded-md"
+                    >
+                        Descargar CV
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {/*Contacto*/}
+        <div class="animate flex justify-center my-4">
+            <ul class="flex flex-wrap gap-2 justify-center">
+                {SOCIALS.map((SOCIAL) => (
+                    <li class="flex gap-x-2 text-nowrap">
+                        <Link
+                            href={SOCIAL.HREF}
+                            external
+                            aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
+                        >
+                            <i class={SOCIAL.ICON} />
+                            {SOCIAL.NAME}
+                        </Link>
+                        {"|"}
+                    </li>
+                ))}
+                <li class="line-clamp-1">
+                    <Link
+                        href={`mailto:${SITE.EMAIL}`}
+                        aria-label={`Email ${SITE.NAME}`}
+                    >
+                        <i class="fas fa-envelope"></i>
+                        {SITE.EMAIL}
+                    </Link>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-10">
+            <section>
+                <article class="space-y-4">
+                    <p class="animate text-black dark:text-white text-sm">
+                        Soy Adria, programador C++ en Unreal Engine con dos años de experiencia en el desarrollo de realidad virtual e innovación. Anteriormente, trabajé durante un año como desarrollador web, formando una base sólida en C++ y otras tecnologías web.
+                    </p>
+                    <p class="animate text-black dark:text-white text-sm">
+                        Me interesa el sector de los videojuegos, las experiencias inmersivas y cualquier proyecto que pueda enriquecerme como programador de C++. Mi objetivo es continuar mi carrera como desarrollador de C++ en Unreal Engine, contribuyendo a proyectos innovadores y desafiantes donde pueda seguir creciendo y aportando con mis habilidades.
+                    </p>
+                </article>
+            </section>
+
+            {/* Experiencia laboral */}
+            <section class="animate space-y-2">
+                <div
+                    class="flex flex-wrap gap-y-2 items-center justify-between"
+                >
+                    <h5
+                        class="font-semibold text-black dark:text-white text-2xl"
+                    >
+                        Experiencia Laboral
+                    </h5>
+                </div>
+            <ul class="flex flex-col space-y-12">
+                {
+                    work.map((entry, index) => (
+                        <li>
+                            {/* Fecha */}
+                            <div class="text-sm opacity-87">
+                                {dateRange(
+                                    entry.data.dateStart,
+                                    entry.data.dateEnd,
+                                )}
+                            </div>
+        
+                            {/* Compañia */}
+                            <div class="font-semibold text-black dark:text-white text-lg">
+                                {entry.data.company}
+                            </div>
+        
+                            {/* Cargo */}
+                            <div class="text-sm opacity-87">
+                                {entry.data.role}
+                            </div>
+        
+                            {/* Contenido */}
+                            <article class="text-black dark:text-white text-sm">
+                                <entry.Content />
+                            </article>
+        
+                            {/* Proyectos */}
+                            {allprojects.filter(
+                                (project) =>
+                                    project.data.company ===
+                                    entry.data.company,
+                            ).length > 0 && (
+                                <div class="space-y-2 yes-print">
+                                    <span class="font-semibold text-black dark:text-white text-sm">
+                                        Proyectos:
+                                    </span>{" "}
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        {allprojects
+                                            .filter(
+                                                (project) =>
+                                                    project.data.company ===
+                                                    entry.data.company,
+                                            )
+                                            .map((project, projectIndex) => (
+                                                <li
+                                                    class="text-sm"
+                                                >
+                                                    <span class="text-black dark:text-white text-sm">
+                                                        {project.data.title}
+                                                    </span>{" "}
+                                                    <span class="opacity-87">
+                                                        {
+                                                            project.data
+                                                                .description
+                                                        }
+                                                    </span>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </div>
+                            )}
+        
+                            {/* Stack */}
+                            {entry.data.stack &&
+                                entry.data.stack.length > 0 && (
+                                    <div class="text-sm space-y-2 mt-4">
+                                        <span class="font-semibold text-black dark:text-white">
+                                            Stack:
+                                        </span>{" "}
+                                        <span class="opacity-87">
+                                            {entry.data.stack.join(", ")}
+                                        </span>
+                                    </div>
+                                )}
+        
+                            {/* Salto de pagina al descargar CV */}
+                            {index != work.length - 1 && (
+                                <div style="height:205px" class="yes-print"></div>
+                            )}
+                        </li>
+                    ))
+                }
+            </ul>
+            </section>
+
+            <section class="animate space-y-4 no-print">
+                <div
+                    class="flex flex-wrap gap-y-4 items-center justify-between"
+                >
+                    <h5
+                        class="font-semibold text-black dark:text-white text-2xl"
+                    >
+                        Proyectos
+                    </h5>
+                    <Link href={`/projects/${lang}/`}> Ver todos </Link>
+                </div>
+                <ul class="flex flex-col gap-4">
+                    {
+                        projects.map((project) => (
+                            <li>
+                                <ArrowCard entry={project} />
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
+
+            <section class="animate space-y-2">
+                <div
+                    class="flex flex-wrap gap-y-2 items-center justify-between"
+                >
+                    <h5
+                        class="font-semibold text-black dark:text-white text-2xl"
+                    >
+                        Titulaciones
+                    </h5>
+                </div>
+                <ul class="flex flex-col space-y-4">
+                    {
+                        degree.map((entry) => (
+                            <li>
+                                <div class="text-sm opacity-87">
+                                    {dateRange(
+                                        entry.data.dateStart,
+                                        entry.data.dateEnd,
+                                    )}
+                                </div>
+                                <div class="font-semibold text-black dark:text-white">
+                                    {entry.data.name}
+                                </div>
+                                <div class="text-sm opacity-87">
+                                    {entry.data.university}
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
+        </div>
+    </Container>
+</PageLayout>
