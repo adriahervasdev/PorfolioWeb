@@ -12,11 +12,7 @@ export function useTranslations(lang: keyof typeof ui) {
   }
 }
 
-export function getUpdateURL(url: URL, oppositeLang: string) {
-    const [, lang] = url.pathname.split('/');
-    if (lang in ui) {
-        const newPathname = url.pathname.replace(`/${lang}`, `/${oppositeLang}`);
-        return `${url.origin}${newPathname}${url.search}${url.hash}`;
-    }
-    return url.href;
+export function getUpdateURL(url: URL, lang: string, oppositeLang: string) {
+    const newPathname = url.pathname.replace(`/${lang}`, `/${oppositeLang}`);
+    return `${url.origin}${newPathname}${url.search}${url.hash}`;
   }

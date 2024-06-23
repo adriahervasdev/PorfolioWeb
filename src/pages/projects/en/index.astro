@@ -7,11 +7,11 @@ import { PROJECTS } from "@consts";
 
 import { getLangFromUrl, useTranslations } from '@i18n/utils/utils.ts';
 
-const lang = Astro.url.pathname.endsWith('/en/') ? 'en' : 'es';
+const lang = Astro.url.pathname.includes('/en/') ? 'en' : 'es';
 const t = useTranslations(lang);
 
 const projects = (await getCollection(`projects`))
-  .filter(project => !project.data.draft && project.id.startsWith(`${lang}/`))
+  .filter(project => !project.data.draft && project.id.startsWith(`${lang}`))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
@@ -19,7 +19,7 @@ const projects = (await getCollection(`projects`))
   <Container>
     <div class="space-y-10">
       <div class="animate font-semibold text-black dark:text-white">
-        Projects
+        {t('nav.projects')}
       </div>
       <ul class="animate flex flex-col gap-4">
         {

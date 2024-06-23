@@ -4,4 +4,4 @@ description: "Virtual clothing fitting room with real-time simulation run in pix
 date: "12/01/2023"
 company: "Extendra"
 ---
-Hola que tal
+Tailor es

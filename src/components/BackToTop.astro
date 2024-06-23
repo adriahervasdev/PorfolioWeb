@@ -1,7 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations} from '@i18n/utils/utils.ts';
 
-const lang = Astro.url.pathname.endsWith('/en/') ? 'en' : 'es';
+const lang = Astro.url.pathname.includes('/en/') ? 'en' : 'es';
 const t = useTranslations(lang);
 ---
 <button id="back-to-top" class="no-print relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">

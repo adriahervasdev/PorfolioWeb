@@ -8,7 +8,7 @@ import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const lang = Astro.url.pathname.includes('/en/') ? 'en' : 'es';
 
 const projects = (await getCollection(`projects`))
   .filter(project => !project.data.draft && project.id.startsWith(`${lang}/`))

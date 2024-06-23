@@ -5,10 +5,10 @@ import { SITE } from "@consts";
 
 import { getLangFromUrl, useTranslations, getUpdateURL} from '@i18n/utils/utils.ts';
 
-const lang = Astro.url.pathname.endsWith('/en/') ? 'en' : 'es';
+const lang = Astro.url.pathname.includes('/en/') ? 'en' : 'es';
 const t = useTranslations(lang);
 const oppositeLang = lang === 'es' ? 'en' : 'es';
-const OppositeUrl = getUpdateURL(Astro.url, oppositeLang);
+const OppositeUrl = getUpdateURL(Astro.url, lang, oppositeLang);
 const flagSvg = lang === 'en' ? '../../../flag-eeuu.svg' : '../../../flag-spain.svg'; 
 ---
 
