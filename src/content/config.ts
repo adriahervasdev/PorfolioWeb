@@ -31,6 +31,7 @@ const projects = defineCollection({
         demoURL: z.string().optional(),
         repoURL: z.string().optional(),
         company: z.string(),
+        logocompany: z.string().optional(),
     }),
 });
 
