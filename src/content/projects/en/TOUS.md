@@ -4,4 +4,4 @@ description: "VR application with pixel streaming."
 date: "09/01/2023"
 company: "Extendra"
 ---
-TOUS Metaverse en
+VR application with pixel streaming.

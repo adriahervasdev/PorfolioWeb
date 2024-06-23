@@ -4,4 +4,4 @@ description: "Probador de ropa virtual con simulación en tiempo real ejecutado 
 date: "12/01/2023"
 company: "Extendra"
 ---
-badf
+Probador de ropa virtual con simulación en tiempo real ejecutado en pixel streaming.

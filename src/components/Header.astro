@@ -3,7 +3,7 @@ import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import { SITE } from "@consts";
 
-import { getLangFromUrl, useTranslations, getUpdateURL} from '@i18n/utils/utils.ts';
+import { useTranslations, getUpdateURL} from '@i18n/utils/utils.ts';
 
 const lang = Astro.url.pathname.includes('/en/') ? 'en' : 'es';
 const t = useTranslations(lang);
