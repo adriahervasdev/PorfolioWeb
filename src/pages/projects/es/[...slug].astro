@@ -13,7 +13,7 @@ const t = useTranslations(lau);
 
 export async function getStaticPaths() {
     const projects = (await getCollection(`projects`))
-    .filter(project => project.id.startsWith("en"));
+    .filter(project => project.id.startsWith("es"));
 
   return projects.map(project => {
     const [lang, ...slug] = project.slug.split('/');
