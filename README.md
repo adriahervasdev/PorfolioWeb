@@ -1,4 +1,4 @@
-## Visit at: ([adriahervas.com](https://adriahervas.con))
+## Visit at: ([adriahervas.com](https://adriahervas.com))
 Web portfolio based on the template created by Mark Horn ([Astro Nano](https://astro.build/themes/details/astronano/)). The goal is to showcase my professional career with my CV and the projects I have collaborated on, both professionally and individually.
 
 ## Includes the following new features:
