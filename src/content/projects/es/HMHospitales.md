@@ -5,19 +5,15 @@ date: "08/01/2023"
 company: "Extendra"
 logocompany: "/extendra.png"
 ---
-![MH Hopitales](/public/HMHospitales.png)
+![MH Hopitales](/HMHospitales.png)
 
 ### Descripción
 
-Web 3D recorrido por Maternidad.
+Desarrollo Web de un recorrido virtual de 360º para uno de los centros de maternidad de HM Hospitales. La aplicación incluye hotspots interactivos que permiten a los usuarios navegar por las instalaciones y acceder a información detallada sobre los distintos espacios y el equipamiento del centro.
 
 ### Rol
 
-- **Programador Web**: .
-- **Responsabilidades**:
-  - 
-  - 
-  - 
+- **Programador Web**: implementación técnica y la integración de los elementos interactivos.
 
 ### Herramientas y Tecnologías
 
@@ -26,6 +22,4 @@ Web 3D recorrido por Maternidad.
 - CSS
 
 ### Desafíos y Logros
-
-- **Tareas destacables**:
-  - .
+- Desarrollo exitoso del proyecto en un plazo acotado, logrando un resultado de alta calidad y asegurando una fácil integración con la página web del cliente.

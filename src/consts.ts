@@ -28,6 +28,24 @@ export const PROJECTS: Metadata = {
     DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
 };
 
+export const TECNOLOGIES = {
+    "C++": "/Icons/",
+    "Qt": "/Icons/",
+    "Unreal Engine 5": "/Icons/",
+    "Unreal Engine 4": "/Icons/",
+    "AWS": "/Icons/",
+    "Git": "/Icons/",
+    "GitHub": "/Icons/",
+    "Python": "/Icons/",
+    "Perforce": "/Icons/",
+    "Js": "/Icons/",
+    "HTML": "/Icons/",
+    "SVN": "/Icons/",
+    "CSS": "/Icons/",
+    "PostgreSQL": "/Icons/",
+    "PHP": "/Icons/",
+};
+
 export const SOCIALS: Socials = [
     //   { 
     //     NAME: "twitter-x",
