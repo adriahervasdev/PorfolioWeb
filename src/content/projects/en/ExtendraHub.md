@@ -4,7 +4,13 @@ description: "VR environment for coworking and events."
 date: "11/01/2023"
 company: "Extendra"
 logocompany: "/extendra.png"
-projectURL: "https://extendra.io/es/extendra-hub"
+projectURL: "https://extendra.io/en/extendra-hub"
+tecnologies:
+  - "Unreal Engine"
+  - "C++"
+  - "Oculus"
+  - "Git"  
+  - "Multiplayer"
 ---
 ![Extendra Hub](/ExtendraHubWorking.png)
 

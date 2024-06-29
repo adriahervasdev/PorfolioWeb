@@ -4,6 +4,16 @@ description: "Helpdesk software integrated with messaging platforms."
 date: "01/01/2021"
 company: "DialApplet"
 logocompany: "/DialApplet.png"
+projectURL: "https://www.dialapplet.com/omnicanalidad/"
+tecnologies:
+  - "C++"
+  - "Qt"
+  - "Js"
+  - "HTML"
+  - "SVN"
+  - "CSS"
+  - "PostgreSQL"
+  - "PHP"
 ---
 ![DialApplet](/DialAppletChat.png)
 

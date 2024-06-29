@@ -4,6 +4,13 @@ description: "VR application with pixel streaming."
 date: "09/01/2023"
 company: "Extendra"
 logocompany: "/extendra.png"
+projectURL: "https://extendra.io/es/proyectos/tous-manifesto"
+tecnologies:
+  - "Unreal Engine"
+  - "C++"
+  - "Oculus"
+  - "Git"
+  - "Multiplayer"
 ---
 ![TOUS](/TOUS.png)
 

@@ -4,6 +4,12 @@ description: "Recontrucción AR antiguo hospital de Senegal."
 date: "07/01/2023"
 company: "Extendra"
 logocompany: "/extendra.png"
+tecnologies:
+  - "Unreal Engine"
+  - "C++"
+  - "Android"
+  - "IOS"
+  - "Git"
 ---
 ![CHNALD AR](/LeDantecAR.png)
 

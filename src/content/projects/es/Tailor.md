@@ -5,6 +5,12 @@ date: "12/01/2023"
 company: "Extendra"
 logocompany: "/extendra.png"
 projectURL: "https://extendra.io/es"
+tecnologies:
+  - "Unreal Engine"
+  - "C++"
+  - "Google Cloud"
+  - "Git"
+  - "Singleplayer"
 ---
 ![Extendra Hub](/Tailor.png)
 

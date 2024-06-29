@@ -5,6 +5,12 @@ date: "11/01/2023"
 company: "Extendra"
 logocompany: "/extendra.png"
 projectURL: "https://extendra.io/es/extendra-hub"
+tecnologies:
+  - "Unreal Engine"
+  - "C++"
+  - "Oculus"
+  - "Git"  
+  - "Multiplayer"
 ---
 ![Extendra Hub](/ExtendraHubWorking.png)
 
