@@ -2,57 +2,163 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+@font-face {
+  font-family: 'InterTitle'; /* Puedes darle el nombre que quieras, pero usa uno descriptivo */
+  src: url('../fonts/Inter_24pt-ExtraBold.ttf') format('truetype'); /* Ruta relativa a tu archivo CSS */
+  font-weight: normal; /* O el peso que tenga tu archivo .ttf específico (puedes tener varios archivos para distintos pesos) */
+  font-style: normal;
+  font-display: swap; /* Muy importante para el rendimiento y la experiencia de usuario */
+}
+
+@font-face {
+  font-family: 'InterLinks'; /* Puedes darle el nombre que quieras, pero usa uno descriptivo */
+  src: url('../fonts/Inter_24pt-SemiBoldItalic.ttf') format('truetype'); /* Ruta relativa a tu archivo CSS */
+  font-weight: normal; /* O el peso que tenga tu archivo .ttf específico (puedes tener varios archivos para distintos pesos) */
+  font-style: normal;
+  font-display: swap; /* Muy importante para el rendimiento y la experiencia de usuario */
+}
+
+@font-face {
+  font-family: 'InterRegular'; /* Puedes darle el nombre que quieras, pero usa uno descriptivo */
+  src: url('../fonts/Inter_24pt-Medium.ttf') format('truetype'); /* Ruta relativa a tu archivo CSS */
+  font-weight: normal; /* O el peso que tenga tu archivo .ttf específico (puedes tener varios archivos para distintos pesos) */
+  font-style: normal;
+  font-display: swap; /* Muy importante para el rendimiento y la experiencia de usuario */
+}
+
+.InterTitle{
+  font-family: 'InterTitle', sans-serif;
+}
+
+.InterLinks{
+  font-family: 'InterLinks', sans-serif;
+}
+
 html {
   overflow-y: scroll;
   color-scheme: light;
 }
 
-html.dark {
-  color-scheme: dark;
+:root {
+  --secondary: 105, 174, 123;
+  --accent: 0, 0, 0;
+  --accent-bg: 245, 245, 245;
+  --accent-header: 252, 252, 252;
+
+  --secondary-logo: rgb(105, 174, 123);
+  --primary-logo: rgb(0, 0, 0);
+
+  --brightness: 1.0;
+  --contrast: 1.0;
+  --saturate: 1.0;
+  --blur: 0.0px;
 }
 
-html,
-body {
-  @apply w-full h-full;
-}
+
 
 body {
-  @apply font-sans antialiased;
-  @apply flex flex-col;
-  @apply bg-stone-100 dark:bg-stone-900;
-  @apply text-black/50 dark:text-white/75;
+  transition: all 0.3s ease-in-out;
+  font-family: 'InterRegular', sans-serif;
+}
+
+option:hover {
+  background-color: yellow;
+}
+
+@layer base {
+  :root {
+    @apply overflow-y-scroll scroll-smooth bg-accent-bg underline-offset-4 selection:bg-accent/90 selection:text-accent-bg ;
+
+    #page-wrapper {
+      @apply mx-auto flex min-h-[100svh] w-full flex-col justify-normal text-accent;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    @apply h-1 w-2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-accent;
+    border-radius: 3pt;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-accent/25;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent/75;
+  }
+}
+
+@layer utilities {
+  .clickable {
+    @apply cursor-pointer opacity-75 transition duration-500 ease-in-out hover:text-accent hover:opacity-100;
+  }
+
+  .animate-links {
+    a {
+      position: relative;
+      /* Necesario para controlar la posición del subrayado */
+      /* padding-bottom: 4px; */
+      /* Espacio entre texto y subrayado */
+    }
+
+    a::after {
+      
+      content: '';
+      /* Genera el subrayado */
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 7px;
+      /* Parte inferior del padding del texto */
+      height: 2px;
+      /* Grosor del subrayado */
+      background-color: rgba(var(--accent), 0.75);
+      /* Color del subrayado */
+      transform: scaleX(0);
+      /* Oculta inicialmente */
+      transform-origin: left;
+      /* La animación comienza desde la izquierda */
+      transition: transform 0.4s cubic-bezier(0.65, -0.05, 0.25, 1);
+    }
+
+    a:hover::after {
+      transform: scaleX(1);
+      /* Muestra el subrayado al pasar el cursor */
+    }
+  }
+
+  img[data-img-embed=''],
+  img[data-img-embed='true'] {
+    @apply rounded border border-accent;
+  }
+
+  span>span:hover {
+    position: absolute;
+    padding: 2pt 10pt 2pt 10pt;
+    border: 1px solid rgba(var(--accent), 1);
+    background-color: rgba(var(--accent-bg), 0.85);
+    color: rgba(var(--accent), 1.0);
+  }
 }
 
 header {
-  @apply fixed top-0 left-0 right-0 z-50 py-5;
-  @apply bg-stone-100/75 dark:bg-stone-900/25;
+  @apply fixed top-0 left-0 right-0 z-50 py-4;
+  @apply bg-accent-bg/75;
   @apply backdrop-blur-sm saturate-200;
 }
 
 main {
-  @apply flex-1 pt-16 pb-32;
+  @apply flex-1 pt-16 pb-8;
 }
 
 footer {
   @apply py-5 text-sm;
-}
-
-article {
-  @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold prose-p:font-serif;
-  @apply prose-headings:text-black prose-headings:dark:text-white;
-}
-
-@layer utilities {
-  article a {
-    @apply font-sans text-current underline underline-offset-2;
-    @apply decoration-black/15 dark:decoration-white/30;
-    @apply transition-colors duration-300 ease-in-out;
-  }
-  article a:hover {
-    @apply text-black dark:text-white;
-    @apply decoration-black/25 dark:decoration-white/50;
-  }
 }
 
 .animate {

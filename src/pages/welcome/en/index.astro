@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import LandingLayout from "@layouts/LandingLayout.astro";
+import SuscribeNLComponent from "@components/SuscribeNLComponent.astro";
+import Link from "@components/Link.astro";
+import { dateRange } from "@lib/utils";
+import "@/styles/article.css";
+import { SITE, HOME, SOCIALS } from "@consts";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+---
+
+<LandingLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+    <Container>
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8 my-24"
+        >
+            <div class="flex flex-col justify-center space-y-2 no-print w-full">
+                <div class="space-y-1 text-center w-full">
+                    <h1 class="animate InterTitle text-accent text-5xl">
+                        BIENVENIDO te has suscrito con éxito 
+                    </h1>
+                    <p
+                        class="animate text-accent text-4xl InterTitle text-accent/45"
+                    >
+                        Pero antes de que desaparezcas una cosilla más...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-10 my-16">
+            <section>
+                <article class="animate">
+                    <p class="">
+                        Soy Adria, programador C++ en Unreal Engine con dos años
+                        de experiencia en el desarrollo de realidad virtual e
+                        innovación. <strong>Anteriormente, </strong>trabajé
+                        durante dos años como desarrollador web, formando una
+                        base sólida en C++ y otras tecnologías web.
+                    </p>
+                    <p class="">
+                        Me interesa el sector de los videojuegos, las
+                        experiencias inmersivas y cualquier proyecto que pueda
+                        enriquecerme como programador de C++. Mi objetivo es
+                        continuar mi carrera como desarrollador de C++ en Unreal
+                        Engine, contribuyendo a proyectos innovadores y
+                        desafiantes donde pueda seguir creciendo y aportando con
+                        mis habilidades.
+                    </p>
+                </article>
+            </section>
+
+            <SuscribeNLComponent></SuscribeNLComponent>
+
+        </div>
+    </Container>
+</PageLayout>

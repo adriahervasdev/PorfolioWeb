@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { CATEGORIES } from "@consts";
+
+type Props = {
+  entry: CollectionEntry<"posts">;
+};
+
+// Definimos el tipo de las tecnologías
+type TechnologiesType = {
+  [key: string]: string;
+};
+
+const { entry } = Astro.props;
+const technologies = CATEGORIES as TechnologiesType;
+---
+
+<a
+  href={`/${entry.collection}/${entry.slug}`}
+  class="relative group flex flex-nowrap py-4 px-4 sm:pr-10 rounded-lg border border-accent/15  hover:bg-accent/5  hover:text-accent  transition-colors duration-300 ease-in-out"
+>
+  <div class="flex flex-col flex-1">
+    <div class="InterTitle text-2xl text-ellipsis line-clamp-1">
+      {entry.data.title}
+    </div>
+    <div class="text-xl text-ellipsis line-clamp-2 mt-2">
+  {entry.data.description}
+</div>
+    {
+      entry.data.categories && entry.data.categories.length > 0 && (
+        <div class="flex-wrap space-x-1 mt-2 flex ">
+          {entry.data.categories.map((tech, index) => (
+            <span class="flex items-center border border-accent/15 rounded-md mt-2 px-1 py-0.5 text-base">
+              {technologies[tech] && (
+                <img
+                  src={technologies[tech]}
+                  alt={`${tech} Logo`}
+                  class="h-5 w-auto mr-1"
+                />
+              )}
+              {tech}
+            </span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current sm:block hidden"
+  >
+    <line
+      x1="5"
+      y1="12"
+      x2="19"
+      y2="12"
+      class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+    ></line>
+    <polyline
+      points="12 5 19 12 12 19"
+      class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+    ></polyline>
+  </svg>
+</a>

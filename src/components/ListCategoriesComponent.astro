@@ -1,0 +1,87 @@
+---
+import { useTranslations } from "@i18n/utils/utils.ts";
+import { CATEGORIES, CATEGORIES_NAMES } from "@consts";
+
+// Definimos el tipo de las tecnologías
+type TechnologiesType = {
+  [key: string]: string;
+};
+
+const ImagesCategoies = CATEGORIES as TechnologiesType;
+
+const { activeCategory } = Astro.props;
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+---
+
+<div
+  class="gap-2 mx-auto mb-2 pb-1  mt-2 flex w-full sm:pb-0 overflow-x-auto whitespace-nowrap "
+>
+  <a
+    class={`pb-1  text-accent`}
+    {...activeCategory === "latest" ? {} : { href: `/posts/es/1` }}
+  >
+    <div class="flex-wrap flex w-full">
+      <span
+        class={`flex items-center border pl-2 pr-8 border-accent/15 rounded-md mt-2 py-0.5 text-base  ${activeCategory === "latest" ? "bg-accent/5" : " "}`}
+      >
+        <img
+          src={ImagesCategoies["latest"]}
+          alt={`Latest Logo`}
+          class="h-5 w-auto mr-1"
+        />
+
+        {t("nav.latest")}
+      </span>
+    </div>
+    <img />
+  </a>
+
+  {
+    CATEGORIES_NAMES.map((category: (typeof CATEGORIES_NAMES)[number]) => {
+      if (category != "latest") {
+        if (activeCategory === category) {
+          return (
+
+            <a
+              class="pb-1 text-accent"
+            >
+              <div class="flex-wrap flex w-full">
+                <span class="flex items-center border pl-2 pr-8 border-accent/15 bg-accent/5 rounded-md mt-2 py-0.5 text-base">
+                  <img
+                    src={ImagesCategoies[category]}
+                    alt={`${category} Logo`}
+                    class="h-5 w-auto mr-1"
+                  />{" "}
+                  {t(`nav.${category}`)}
+                </span>
+              </div>
+              <img />
+            </a>
+          );
+        } else {
+          return (
+
+            <a
+              class={`pb-1 text-accent"`}
+              href={`/categories/${lang}/${category}/1`}
+            >
+              <div class="flex-wrap flex w-full">
+                <span class="flex items-center border hover:bg-accent/5 pl-2 pr-8 border-accent/15 rounded-md mt-2 py-0.5 text-base">
+                  <img
+                    src={ImagesCategoies[category]}
+                    alt={`${category} Logo`}
+                    class="h-5 w-auto mr-1"
+                  />{" "}
+                  {t(`nav.${category}`)}
+                </span>
+              </div>
+              <img />
+            </a>
+          );
+        }
+      }
+    })
+  }
+</div>

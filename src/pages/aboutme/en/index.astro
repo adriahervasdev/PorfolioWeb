@@ -1,0 +1,100 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import Link from "@components/Link.astro";
+import { dateRange } from "@lib/utils";
+import { SITE, HOME, SOCIALS } from "@consts";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+const lang = Astro.url.pathname.includes('/en/') ? 'en' : 'es';
+
+---
+
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+    <Container>
+        <div class="flex items-center space-x-12 space-y-8">
+            <img
+                src={"../_profile.png"}
+                alt="Profile Picture"
+                class="rounded-full w-40 h-40 object-cover"
+            />
+            <div class="flex flex-col justify-center space-y-2 yes-print">
+                <div class="space-y-1">
+                    <h4 class="animate InterTitle text-black dark:text-white">
+                        Adria Hervas Arocas
+                    </h4>
+                    <p class="animate">Unreal Engine Developer</p>
+                </div>
+                <div class="mt-2">
+                    <p class="text-sm opacity-87">Valencia, España</p>
+                    <p class="text-sm opacity-87">https://adriahervas.com</p>
+                </div>
+            </div>
+            <div class="flex flex-col justify-center space-y-2 no-print">
+                <div class="space-y-1">
+                    <h4 class="animate InterTitle text-black dark:text-white">
+                        Hi, I'm Adria
+                    </h4>
+                    <p class="animate text-black dark:text-white">
+                        Unreal Engine Developer
+                    </p>
+                    <button
+                        onclick="window.print();"
+                        class="animate bg-gray-300 hover:bg-gray-400 text-gray-800 InterTitle py-1 px-3 rounded-md"
+                    >
+                        Download CV
+                    </button>
+                </div>
+            </div>
+        </div>
+        {/*Contacto*/}
+        <div class="animate flex justify-center my-4">
+            <ul class="flex flex-wrap gap-2 justify-center">
+                {SOCIALS.map((SOCIAL) => (
+                    <li class="flex gap-x-2 text-nowrap">
+                        <Link
+                            href={SOCIAL.HREF}
+                            external
+                            aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
+                        >
+                            <i class={SOCIAL.ICON} />
+                            {SOCIAL.NAME}
+                        </Link>
+                        {" "}
+                    </li>
+                ))}
+                <li class="line-clamp-1">
+                    <Link
+                        href={`mailto:${SITE.EMAIL}`}
+                        aria-label={`Email ${SITE.NAME}`}
+                    >
+                        <i class="fas fa-envelope"></i>
+                        {SITE.EMAIL}
+                    </Link>
+                </li>
+            </ul>
+        </div>
+        <div class="space-y-10">
+            <section>
+                <article class="space-y-4">
+                    <p class="animate text-black dark:text-white text-sm">
+                        I am Adria, a C++ programmer in Unreal Engine with two
+                        years of experience in virtual reality and innovation
+                        development. Previously, I worked for two years as a web
+                        developer, establishing a solid foundation in C++ and
+                        other web technologies.
+                    </p>
+                    <p class="animate text-black dark:text-white text-sm">
+                        I have a deep interest in the video game sector,
+                        immersive experiences, and any project that can enrich
+                        me as a C++ programmer. My goal is to continue my career
+                        as a C++ developer in Unreal Engine, contributing to
+                        innovative and challenging projects where I can continue
+                        to grow and contribute with my skills.
+                    </p>
+                </article>
+            </section>*
+        </div>
+    </Container>
+</PageLayout>

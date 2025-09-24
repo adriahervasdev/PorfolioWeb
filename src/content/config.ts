@@ -1,27 +1,7 @@
 import { defineCollection, z } from "astro:content";
+import { CATEGORIES_NAMES } from '@/consts.ts'
 
-const degree = defineCollection({
-    type: "content",
-    schema: z.object({
-        name: z.string(),
-        university: z.string(),
-        dateStart: z.coerce.date(),
-        dateEnd: z.union([z.coerce.date(), z.string()]),
-    }),
-});
-
-const work = defineCollection({
-    type: "content",
-    schema: z.object({
-        company: z.string(),
-        role: z.string(),
-        dateStart: z.coerce.date(),
-        dateEnd: z.union([z.coerce.date(), z.string()]),
-        stack: z.array(z.string()),
-    }),
-});
-
-const projects = defineCollection({
+const posts = defineCollection({
     type: "content",
     schema: z.object({
         title: z.string(),
@@ -29,10 +9,10 @@ const projects = defineCollection({
         date: z.coerce.date(),
         draft: z.boolean().optional(),
         projectURL: z.string().optional(),
-        company: z.string(),
-        logocompany: z.string().optional(),
-        tecnologies: z.array(z.string()).optional(),
+        author: z.string(),
+        logoauthor: z.string().optional(),
+        categories: z.array(z.enum(CATEGORIES_NAMES)),
     }),
 });
 
-export const collections = { degree, work, projects };
+export const collections = { posts };

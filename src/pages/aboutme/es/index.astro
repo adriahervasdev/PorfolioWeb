@@ -1,0 +1,125 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import SuscribeNLComponent from "@components/SuscribeNLComponent.astro";
+import "@/styles/article.css";
+import { SITE, HOME, SOCIALS } from "@consts";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+---
+
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+    <Container>
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8"
+        >
+            <img
+                src={"/_profile.png"}
+                alt="Profile Picture"
+                class="rounded-full w-52 h-52 object-cover"
+            />
+            <div class="flex flex-col justify-center space-y-2 no-print">
+                <div class="space-y-1">
+                    <h4 class="animate InterTitle text-accent text-3xl">
+                        Adrià Hervàs Arocas
+                    </h4>
+                    <p
+                        class="animate text-accent text-xl InterTitle text-accent/45"
+                    >
+                        Freelance de proyectos XR y desarrollador de
+                        videojuegos.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="pt-10">
+            <section>
+                <article class="animate">
+                    <p>
+                        Hice lo que se supone que había que hacer. Carrera,
+                        máster y a currar. La carrera de la rata, ya sabes.
+                    </p>
+
+                    <p>
+                        Primero, en una empresa de programación web con C++.
+                        Luego en una de VR con Unreal donde, la verdad, molaba
+                        más. Todo iba bien.
+                    </p>
+
+                    <p>
+                        Hasta que la realidad me echó una jarra de agua fría
+                        encima. Despido. Y a los pocos meses, la empresa quebró.
+                        (Si te soy sincero, la cosa ya olía desde hacía tiempo).
+                    </p>
+
+                    <p>
+                        Ahí llegó el síndrome del impostor. Normal, había vivido
+                        demasiado cómodo.
+                    </p>
+
+                    <p>
+                        Pero de la nada surgió un proyecto. Como freelance (que
+                        suena muy bien). La idea era ser un falso autónomo
+                        mientras buscaba otra cosa. Un plan sin fisuras.
+                    </p>
+
+                    <p>
+                        Problema, lo que puedes imaginar (o no). Le pillé el
+                        gustito a eso de ser "mi propio jefe".
+                    </p>
+
+                    <p>
+                        Con todos sus contras, la libertad de elegir dónde te
+                        metes, desde donde y cuando trabajas, no tiene precio.
+                        Poder decir "no" a proyectos que no iban a ninguna parte
+                        y meterme en fregados tecnológicos que de verdad les
+                        veía sentido.
+                    </p>
+
+                    <p>
+                        Llevar el desarrollo de un sistema multijugador XR para
+                        que 20 personas interactuaran a la vez en una sala de
+                        museo de 1000m². O crear soluciones de gamificación con
+                        cámaras de profundidad.
+                    </p>
+
+                    <p>
+                        He visto la parte bonita de ser freelance. Y también su
+                        lado oscuro. La soledad, la incertidumbre y la señora
+                        Hacienda.
+                    </p>
+
+                    <p>
+                        Por eso con el objetivo de continuar como autónomo. Mi
+                        intención es seguir creando y construyendo experiencias
+                        inmersivas para clientes. Pero, como la mayoría de
+                        desarrolladores siempre he querido tener mi propio
+                        juego. Y en eso estoy, creando mi primer videojuego.
+                    </p>
+
+                    <p>
+                        Todo lo que ocurre en este camino, el del freelance que
+                        sobrevive y el del creador que empieza de cero, lo estoy
+                        contando en una newsletter.
+                    </p>
+
+                    <p>
+                        La cruda realidad de esta industria. La mezcla de la
+                        experiencia profesional con el vértigo de <strong
+                            >crear un juego Indie.</strong
+                        >
+                    </p>
+
+                    <p>
+                        Si te va el morbo de ver cómo se equilibra todo esto,
+                        aprender de las hostias que me voy dando y la
+                        experiencia de cómo construir mi propia libertad como
+                        GameDev,
+                        <strong>Suscríbete aquí ↓</strong>
+                    </p>
+                    <SuscribeNLComponent />
+                </article>
+            </section>
+        </div>
+    </Container>
+</PageLayout>

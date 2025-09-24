@@ -1,21 +1,93 @@
 export const languages = {
-    en: 'English',
-    es: 'Español',
-  };
-  
-  export const defaultLang = 'es';
-  
-  export const ui = {
-    en: {
-      'nav.projects': 'Projects',
-      'nav.top': 'Back to top',
-      'nav.backprojects': 'Back to projects',
-      'nav.allcompanies': 'All Companies',
-    },
-    es: {
-      'nav.projects': 'Proyectos',
-      'nav.top': 'Volver arriba',
-      'nav.backprojects': 'Volver a proyectos',
-      'nav.allcompanies': 'Todas Compañias',
-    },
-  } as const;
+  en: 'English',
+  es: 'Español',
+};
+
+export const defaultLang = 'es';
+
+export const ui = {
+  en: {
+    'nav.projects': 'Projects',
+    'nav.aboutme': 'About me',
+    'nav.top': 'Back to top',
+    'nav.backprojects': 'Back to projects',
+    'nav.backblog': 'Back to blog',
+    'nav.allcompanies': 'All Companies',
+
+    'nav.privacy': 'Privacy Policy',
+    'nav.cookies': 'Cookies',
+    'nav.legal': 'Legal Notice',
+
+    'nav.suscribise': 'Subscribe',
+    'nav.privacity1': 'Accept the',
+    'nav.privacity2': 'privacy policy',
+    'nav.checkPrivacy': 'You must accept the privacy policy.',
+    'nav.errorForm1': 'Error subscribing to the newsletter.',
+    'nav.errorForm2': 'If the error persists, please email me at',
+    'nav.errorForm3': 'dev@adriahervas.com',
+
+    "nav.latest": "All",
+    "nav.cplusplus": "C++",
+    "nav.qt": "Qt",
+    "nav.unreal": "Unreal Engine",
+    "nav.git": "Git",
+    "nav.python": "Python",
+    "nav.Js": "Js",
+    "nav.html": "HTML",
+    "nav.svn": "SVN",
+    "nav.css": "CSS",
+    "nav.postgresql": "PostgressSQL",
+    "nav.php": "PHP",
+    "nav.googlecloud": "Google Cloud",
+    "nav.singleplayer": "Singleplayer",
+    "nav.multiplayer": "Multijugador",
+    "nav.ios": "IOS",
+    "nav.android": "Android",
+    "nav.oculus": "Oculus",
+    "nav.playcanvas": "Play Canvas",
+    "nav.xr": "XR",
+    "nav.vr": "VR",
+  },
+  es: {
+    'nav.projects': 'Proyectos',
+    'nav.aboutme': 'Sobre mí',
+    'nav.top': 'Volver arriba',
+    'nav.backprojects': 'Volver a proyectos',
+    'nav.backblog': 'Volver a blog',
+    'nav.allcompanies': 'Todas Compañias',
+
+    'nav.privacy': 'Política de Privacidad',
+    'nav.cookies': 'Cookies',
+    'nav.legal': 'Aviso Legal',
+
+    'nav.suscribise': 'Suscríbete',
+    'nav.privacity1': 'Acepta la',
+    'nav.privacity2': 'política de privacidad',
+    'nav.checkPrivacy': 'Debes aceptar la política de privacidad.',
+    'nav.errorForm1': 'Error al suscribirte a la newsletter.',
+    'nav.errorForm2': 'Si el error persiste, envíame un correo electrónico a',
+    'nav.errorForm3': 'dev@adriahervas.com',
+
+    "nav.latest": "Todos",
+    "nav.cplusplus": "C++",
+    "nav.qt": "Qt",
+    "nav.unreal": "Unreal Engine",
+    "nav.git": "Git",
+    "nav.python": "Python",
+    "nav.Js": "Js",
+    "nav.html": "HTML",
+    "nav.svn": "SVN",
+    "nav.css": "CSS",
+    "nav.postgresql": "PostgressSQL",
+    "nav.php": "PHP",
+    "nav.googlecloud": "Google Cloud",
+    "nav.singleplayer": "Singleplayer",
+    "nav.multiplayer": "Multijugador",
+    "nav.ios": "IOS",
+    "nav.android": "Android",
+    "nav.oculus": "Oculus",
+    "nav.playcanvas": "Play Canvas",
+    "nav.xr": "XR",
+    "nav.vr": "VR",
+  },
+} as const;

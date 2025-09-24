@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/_profile.ico" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/_profile.ico" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/_profile.ico"><meta name="generator" content="Astro v4.10.2"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.BT1H-PT_.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.B2Ssfs8e.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.CvHVDnm4.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.DUWh3m6k.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://adriahervas.com/work/es/"><!-- Primary Meta Tags --><title>Work | Adria Hervas</title><meta name="title" content="Work | Adria Hervas"><meta name="description" content="Where I have worked and what I have done."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://adriahervas.com/work/es/"><meta property="og:title" content="Work | Adria Hervas"><meta property="og:description" content="Where I have worked and what I have done."><meta property="og:image" content="https://adriahervas.com/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://adriahervas.com/work/es/"><meta property="twitter:title" content="Work | Adria Hervas"><meta property="twitter:description" content="Where I have worked and what I have done."><meta property="twitter:image" content="https://adriahervas.com/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system") {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/index.BR57yH9x.css">
+<link rel="stylesheet" href="/_astro/index.DXbInot5.css"><script type="module" src="/_astro/hoisted.Le9csk2C.js"></script></head> <body> <header class="no-print"> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/es/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> Adria Hervas </div>  </a> <nav class="flex gap-1 items-center"> <a href="/projects/es/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> Proyectos </a> <span> | </span> <button id="light-theme-button" aria-label="Light theme" class="group size-5 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group size-5 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <a href="https://adriahervas.com/work/en/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out" aria-label="Switch to English">  <img src="../../../flag-spain.svg" alt="Cambiar a Español" class="w-4 h-4 sm-3">  </a> </nav> </div>  </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="space-y-10"> <div class="animate font-semibold text-black dark:text-white">
+Work
+</div> <ul class="flex flex-col space-y-4"> <li class="animate"> <div class="text-sm opacity-75"> sept2024 - Now </div> <div class="font-semibold text-black dark:text-white"> Freelance </div> <div class="text-sm opacity-75"> Unreal Engine Developer | C++ Developer </div> <article> <p>I design and develop custom applications for virtual reality devices for companies across various sectors, with a particular focus on multiplayer experiences that stand out for their interactivity and performance in immersive environments.</p>
+<p>I specialize in implementing optimized and modular solutions, developing plugins and reusable tools that streamline project production and maintenance.</p>
+<p>I work closely with my clients, tailoring each project to their specific needs and applying agile methodologies to ensure timely and high-quality deliveries.</p> </article> </li><li class="animate"> <div class="text-sm opacity-75"> sept2024 - Actualmente </div> <div class="font-semibold text-black dark:text-white"> Freelance </div> <div class="text-sm opacity-75"> Unreal Engine Developer | C++ Developer </div> <article> <p>Diseño y desarrollo aplicaciones a medida para dispositivos de realidad virtual para empresas de diferentes sectores, con especial atención a experiencias multiplayer que destacan por su interacción y rendimiento en entornos inmersivos.</p>
+<p>Me ocupo de implementar soluciones optimizadas y modulares, desarrollando plugins y herramientas reutilizables que facilitan la producción y el mantenimiento de los proyectos.</p>
+<p>Colaboro estrechamente con mis clientes, adaptando cada proyecto a sus necesidades específicas y aplicando metodologías ágiles para asegurar entregas puntuales y de alta calidad.</p> </article> </li><li class="animate"> <div class="text-sm opacity-75"> jul2022 - jun2024 </div> <div class="font-semibold text-black dark:text-white"> Extendra </div> <div class="text-sm opacity-75"> Unreal Engine Developer | C++ Developer </div> <article> <p>As a C++ Unreal Engine developer, I helped maintain code, troubleshoot issues, and encapsulate functionalities into plugins for code reuse across different projects.</p>
+<p>Additionally, I collaborated in the development of various virtual reality applications focused on Meta Quest 2, Meta Quest 3, and HTC Vive XR Elite, covering both single-player and multiplayer experiences.</p>
+<p>I developed augmented reality applications for Android and iOS.</p>
+<p>I contributed to the integration of the necessary pipeline for deploying to Oculus using Git, GitHub, and AWS.</p>
+<p>I worked on projects following the agile Kanban methodology.</p> </article> </li><li class="animate"> <div class="text-sm opacity-75"> jul2022 - jun2024 </div> <div class="font-semibold text-black dark:text-white"> Extendra </div> <div class="text-sm opacity-75"> Unreal Engine Developer | C++ Developer </div> <article> <p>Como desarrollador de Unreal Engine en C++, ayudé a mantener el código, resolver problemas y encapsular funcionalidades en plugins para la reutilización de código en diferentes proyectos.</p>
+<p>Además, colaboré en el desarrollo de diversas aplicaciones de realidad virtual enfocadas en Meta Quest 2, Meta Quest 3 y HTC Vive XR Elite, abarcando tanto experiencias singleplayer como multiplayer.</p>
+<p>Desarrollé aplicaciones de realidad aumentada para Android e iOS.</p>
+<p>Contribuí a la integración de la pipeline necesaria para hacer deploys a Oculus utilizando Git, GitHub y AWS.</p>
+<p>Trabajé en los proyectos siguiendo la metodología ágil Kanban.</p> </article> </li><li class="animate"> <div class="text-sm opacity-75"> oct2020 - sept2022 </div> <div class="font-semibold text-black dark:text-white"> DialApplet </div> <div class="text-sm opacity-75"> Software Developer </div> <article> <p>As a web developer, I collaborated in implementing new functionalities and enhancements for the DialApplet helpdesk software, which is integrated with messaging platforms like WhatsApp, Facebook, and Telegram. This system managed chats via websockets in C++ and used PostgreSQL to store user information.</p> </article> </li><li class="animate"> <div class="text-sm opacity-75"> oct2020 - sept2022 </div> <div class="font-semibold text-black dark:text-white"> DialApplet </div> <div class="text-sm opacity-75"> Software Developer </div> <article> <p>Como desarrollador web, colaboré en la implementación de nuevas funcionalidades y mejoras para el software de helpdesk DialApplet, que está integrado con plataformas de mensajería como WhatsApp, Facebook y Telegram. Este sistema gestionaba los chats mediante websockets en C++ y utilizaba PostgreSQL para almacenar la información de los usuarios.</p> </article> </li> </ul> <!-- 
+      <ul class="animate flex flex-col gap-4">
+
+      </ul> --> </div>  </div>  </main> <footer class="animate no-print"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="no-print relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> Volver arriba </div> </button> </div> </div> <div class="flex justify-between items-center"> <div>
+&copy; 2024 | Adria Hervas </div> <div class="flex flex-wrap gap-1 items-center"> <!-- <button
+          id="light-theme-button"
+          aria-label="Light theme"
+          class="group size-8 flex items-center justify-center rounded-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+        <button
+          id="dark-theme-button"
+          aria-label="Dark theme"
+          class="group size-8 flex items-center justify-center rounded-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <button
+          id="system-theme-button"
+          aria-label="System theme"
+          class="group size-8 flex items-center justify-center rounded-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+          >
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </button> --> </div> </div>  </div> </footer> </body></html>

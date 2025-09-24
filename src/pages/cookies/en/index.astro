@@ -1,0 +1,154 @@
+---
+import Container from "@components/Container.astro";
+import LandingLayout from "@layouts/LandingLayout.astro";
+import SuscribeNLComponent from "@components/SuscribeNLComponent.astro";
+import { useTranslations } from "@i18n/utils/utils.ts";
+import "@/styles/article.css";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+---
+
+<LandingLayout title={t("nav.cookies")} description={t("nav.cookies")}>
+    <Container>
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8 my-24"
+        >
+            <div class="flex flex-col justify-center space-y-2 no-print w-full">
+                <div class="space-y-1 text-center w-full">
+                    <h1 class="animate InterTitle text-accent text-5xl">
+                        {t("nav.cookies")} Policy
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-10 my-16">
+            <section>
+                <article class="animate">
+                    <p class="">
+                        At adriahervas.com (hereinafter, "the Website"), we take
+                        your privacy very seriously. Below, we inform you about
+                        the use of cookies on our site.
+                    </p>
+
+                    <h2>What are Cookies?</h2>
+                    <p class="">
+                        Cookies are small text files stored on your browser when
+                        you visit a website. Their purpose is to allow the
+                        website to remember information about your visit, such
+                        as your preferences, so that your next visit is smoother
+                        and the site is more useful to you.
+                    </p>
+
+                    <h2>What type of Cookies do we use on adriahervas.com?</h2>
+                    <p class="">
+                        Currently, at adriahervas.com, we only use strictly
+                        essential (technical) cookies. These cookies are
+                        indispensable for the proper functioning of the Website
+                        and for you to navigate it and use its basic features.
+                    </p>
+
+                    <p>
+                        Essential cookies do not require your express consent,
+                        as they are necessary for providing the service you
+                        request when accessing our website. Their main function
+                        is to:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong
+                                >Enable communication between your device and
+                                the network:</strong
+                            > Ensure the website loads correctly and that you can
+                            access its content.
+                        </li>
+                        <li>
+                            <strong>Manage the user session:</strong> Keep you logged
+                            in while you browse different pages within the site.
+                        </li>
+                        <li>
+                            <strong>Implement security measures:</strong> Help detect
+                            and prevent security risks, ensuring the protection of
+                            the site and its users.
+                        </li>
+                        <li>
+                            <strong>Remember your basic preferences:</strong> For
+                            example, whether or not you've accepted this cookie notice,
+                            so we don't constantly show it to you.
+                        </li>
+                    </ul>
+
+                    <h2>
+                        Which specific essential cookies might be used on
+                        adriahervas.com?
+                    </h2>
+                    <p class="">
+                        While the exact list may vary depending on the server or
+                        platform's technical configuration, the most common
+                        essential cookies that might be present are:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong>Session Cookies:</strong> These are temporary
+                            and are deleted when you close your browser. Their function
+                            is to allow smooth navigation and access to secure areas
+                            of the website.
+                        </li>
+                        <li>
+                            <strong>Security Cookies:</strong> These are used to
+                            protect the website from potential attacks or malicious
+                            activities.
+                        </li>
+                        <li>
+                            <strong>Preference Cookies:</strong> These might save
+                            a minimal preference, such as your consent to this cookie
+                            notice, so it doesn't reappear repeatedly.
+                        </li>
+                    </ul>
+
+                    <p>
+                        In no case do we use cookies to collect personal
+                        information that can directly identify you, nor for
+                        advertising purposes, behavioral statistical analysis,
+                        or tracking your activity on other websites.
+                    </p>
+
+                    <h2>How to Manage Cookies?</h2>
+
+                    <p>
+                        Since we only use essential cookies for the basic
+                        functioning of the Website, these will be loaded
+                        automatically when you access adriahervas.com.
+                    </p>
+
+                    <p class="">
+                        Although these cookies are necessary, you can configure
+                        your browser to notify you about receiving cookies or to
+                        prevent their installation. However, if you block these
+                        cookies, certain functionalities of the Website may not
+                        operate correctly, or your Browse experience may be
+                        limited.
+                    </p>
+
+                    <h2>Contact</h2>
+
+                    <p>
+                        If you have any questions about our Cookie Policy, you
+                        can contact us at dev@adriahervas.com
+                    </p>
+
+                    <h2>Just one more thing...</h2>
+                    <p class="">
+                        If you've learned something here, when you read the
+                        newsletter, you're gonna flip! &#x2193;
+                    </p>
+                </article>
+            </section>
+
+            <SuscribeNLComponent />
+        </div>
+    </Container>
+</LandingLayout>

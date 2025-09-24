@@ -1,0 +1,27 @@
+---
+import Head from "@components/Head.astro";
+import HeaderLanding from "@components/HeaderLanding.astro";
+import Footer from "@components/Footer.astro";
+import { SITE } from "@consts";
+
+type Props = {
+  title: string;
+  description: string;
+};
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={`${title} | ${SITE.NAME}`} description={description} />
+  </head>
+  <body>
+    <HeaderLanding />
+    <main class="mt-6 min-h-dvh">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

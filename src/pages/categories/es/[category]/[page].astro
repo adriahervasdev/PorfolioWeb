@@ -1,0 +1,73 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import type { CollectionEntry } from "astro:content";
+import Container from "@components/Container.astro";
+import ListCategoriesComponent from "@components/ListCategoriesComponent.astro";
+import PaginationComponent from "@components/PaginationComponent.astro";
+import ArrowCardPost from "@components/ArrowCardPost.astro";
+import {
+    getCategories,
+    getPostsByCategory
+} from "@/utils/PostFunctions.ts";
+
+
+export async function getStaticPaths({ paginate }: any) {
+    const categories = (await getCategories()) || [];
+
+    const paths = await Promise.all(
+        categories.map(async (category) => {
+            const posts = await getPostsByCategory(category, "es");
+
+            if (!posts || posts.length === 0) {
+                console.warn(`⚠️ No posts found for category: ${category}`);
+                return [];
+            }
+
+            return paginate(posts, {
+                pageSize: 2,
+                params: { category },
+            });
+        }),
+    );
+
+    return paths.flat();
+}
+
+// Accede a las propiedades de paginación
+const { page } = Astro.props; // 'page' contendrá toda la información de paginación
+
+// Accede a los posts de la página actual
+const posts = page.data as CollectionEntry<'posts'>[] || [];
+
+const params = Astro.params;
+
+// Información para la paginación
+const currentPage = page.currentPage;
+const totalPages = page.lastPage;
+const prevPage = page.url.prev;
+const nextPage = page.url.next;
+---
+
+<PageLayout title="Blog" description="Blog">
+    <Container>
+        <div class="space-y-5">
+            <div class="InterTitle text-black text-3xl">
+                Blog
+            </div>
+            <ListCategoriesComponent activeCategory={params.category}></ListCategoriesComponent>
+
+            <ul id="projectsList" class="animate flex flex-col gap-4">
+                {
+                    posts.map((post) => (
+                        <li data-author={post.data.author}>
+                            <ArrowCardPost entry={post} />
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <PaginationComponent currentPage={currentPage} totalPages={totalPages} prevPage={prevPage} nextPage={nextPage}></PaginationComponent>
+
+        </div>
+    </Container>
+</PageLayout>

@@ -1,0 +1,232 @@
+/* Global article styles */
+article {
+  font-family: 'InterRegular', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  color: rgba(var(--accent), 0.85);
+  /* Texto oscuro para buen contraste */
+  /* max-width: 700px; */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Headings */
+article h1,
+article h2,
+article h3,
+article h5,
+article h6,
+article h4 {
+  font-family: 'InterTitle', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  margin: 2rem 0 1rem;
+  line-height: 1.4;
+  color: rgba(var(--accent), 1);
+}
+
+article h1 {
+  margin: 2.5rem 0 0 0;
+  border-bottom: 2px solid rgba(var(--accent), 1);
+  padding-bottom: 0.5rem;
+
+  font-size: 2.25rem /* 36px */;
+  line-height: 2.5rem /* 40px */;
+}
+
+article h2 {
+  font-size: 1.875rem /* 30px */;
+  line-height: 2.25rem /* 36px */;
+}
+
+article h3 {
+  font-size: 1.5rem /* 24px */;
+  line-height: 2rem /* 32px */;
+}
+
+article h4 {
+  font-size: 2.1rem;
+}
+
+article h5 {
+  font-size: 1.8rem;
+}
+
+article h6 {
+  font-size: 1.5rem;
+}
+
+/* Paragraphs */
+article p {
+  margin: 0 0 3rem 0;
+  color: rgba(var(--accent), 0.85);
+  text-align: left;
+
+  /* class text-xl */
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+/* Links */
+/* article a {
+  color: rgba(var(--secondary),0.7);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+} */
+
+strong {
+  color: rgba(var(--accent), 1.0);
+}
+
+/* article a:hover {
+  color: rgba(var(--secondary),1.0);
+} */
+
+/* Lists */
+article ul {
+  list-style: disc;
+  margin-left: 2rem;
+  margin-bottom: 3rem;
+}
+
+article ul li {
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+}
+
+article ol {
+  list-style: decimal;
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+article ol li {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+/* Blockquotes */
+article blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(var(--accent-header), 0.5);
+  border-left: 5px solid rgba(var(--secondary), 1.0);
+  color: rgba(var(--accent), 0.8);
+  font-style: italic;
+}
+
+article blockquote p {
+  margin: 0.5rem 0;
+}
+
+/* Code */
+article pre {
+  background-color: rgba(var(--accent-header), 1.0);
+  color: rgba(var(--secondary), 1.0);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.astro-code {
+  background-color: rgba(var(--accent-header), 1.0) !important;
+}
+
+article code {
+  font-family: "Cutive Mono", monospace;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 0.95rem;
+  background: rgba(var(--accent-header), 1.0);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  color: rgba(var(--accent), 0.8);
+}
+
+/* Horizontal Rules */
+article hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 2px solid rgba(var(--accent), 0.2);
+}
+
+/* Images */
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* Tables */
+article table {
+  margin-left: 0 !important;
+  /* Elimina el centrado solo para la tabla */
+  margin-right: 0 !important;
+  /* Elimina el centrado solo para la tabla */
+  max-width: 100% !important;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: medium;
+}
+
+article table th,
+article table td {
+  border-top: 1px solid rgba(var(--accent), 1);
+  /* Bordes visibles para celdas */
+  border-bottom: 1px solid rgba(var(--accent), 1);
+  /* Bordes visibles para celdas */
+  padding: 8pt 10pt 8pt 10pt;
+  text-align: left;
+  background: rgba(var(--accent), 0.03);
+  min-width: 95pt;
+  max-height: 1pt;
+}
+
+article table th {
+  background: rgba(var(--accent), 0.1);
+  /* Fondo ligero para encabezados */
+  font-weight: bold;
+}
+
+article table tbody tr:hover {
+  background: rgba(var(--secondary), 0.3);
+  /* Cambio de fondo en hover */
+  transition: background-color 0.3s ease;
+  /* Animación suave */
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+  article {
+    max-width: max-content;
+  }
+
+  article h1 {
+    font-size: 2.5rem;
+  }
+
+  article h2 {
+    font-size: 2.25rem;
+  }
+
+  article h3 {
+    font-size: 2.0rem;
+  }
+
+  article h4 {
+    font-size: 1.75rem;
+  }
+
+  article h5 {
+    font-size: 1.5rem;
+  }
+
+  article h6 {
+    font-size: 1.25rem;
+  }
+}

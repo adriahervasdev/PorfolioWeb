@@ -1,0 +1,87 @@
+---
+import  { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import type { Page  } from 'astro';
+import PageLayout from "@layouts/PageLayout.astro";
+import PaginationComponent from "@components/PaginationComponent.astro";
+import ListCategoriesComponent from "@components/ListCategoriesComponent.astro";
+import Container from "@components/Container.astro";
+import ArrowCardPost from "@components/ArrowCardPost.astro";
+import { PROJECTS } from "@consts";
+import { useTranslations } from "@i18n/utils/utils.ts";
+
+const lang = Astro.url.pathname.endsWith("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+
+export async function getStaticPaths({ paginate }: any) {
+    const posts = (await getCollection(`posts`))
+        .filter((post) => !post.data.draft && post.id.startsWith(`en/`))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+    return paginate(posts, {
+        pageSize: 4,
+    });
+}
+
+interface Props {
+  page: Page<CollectionEntry<'posts'>>; // ¡Aquí es donde tipamos 'page'!
+}
+
+const { page } = Astro.props;
+const posts = page.data || []; // <-- ¡Aquí están solo los posts de la página actual!
+
+const authors = [...new Set(posts.map((post) => post.data.author))];
+
+// Puedes usar las propiedades de 'page' para la navegación de paginación
+const currentPage = page.currentPage;
+const totalPages = page.lastPage;
+const prevPage = page.url.prev;
+const nextPage = page.url.next;
+---
+
+<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+    <Container>
+        <div class="space-y-5">
+            <div class="InterTitle text-black text-3xl">Blog</div>
+            <ListCategoriesComponent activeCategory="latest"></ListCategoriesComponent>
+
+            <ul id="projectsList" class="animate flex flex-col gap-4">
+                {
+                    posts.map((post) => (
+                        <li data-author={post.data.author}>
+                            <ArrowCardPost entry={post} />
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <PaginationComponent currentPage={currentPage} totalPages={totalPages} prevPage={prevPage} nextPage={nextPage}></PaginationComponent>
+        </div>
+    </Container>
+</PageLayout>
+
+<script define:vars={{ posts, authors }} is:inline>
+    function OnCompanySelected(event) {
+        //Change projects visibility
+        const projectItems = document.querySelectorAll("#postsList li");
+        projectItems.forEach((li) => {
+            if (event.target.value == "all") {
+                li.style.display = "block";
+            } else {
+                const projectCompany = li.getAttribute("data-company");
+                if (projectCompany === event.target.value) {
+                    li.style.display = "block";
+                } else {
+                    li.style.display = "none";
+                }
+            }
+        });
+    }
+
+    const input = document.querySelectorAll("#companyFilter");
+    input.forEach((e) => {
+        e.addEventListener("change", (event) => {
+            OnCompanySelected(event);
+        });
+    });
+</script>

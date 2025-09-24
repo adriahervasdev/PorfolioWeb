@@ -1,0 +1,42 @@
+---
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import { SITE } from "@consts";
+
+import { useTranslations, getUpdateURL } from "@i18n/utils/utils.ts";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+const oppositeLang = lang === "es" ? "en" : "es";
+const OppositeUrl = getUpdateURL(Astro.url, lang, oppositeLang);
+const flagSvg =
+    lang === "en" ? "../../../flag-eeuu.svg" : "../../../flag-spain.svg";
+---
+
+<header class="no-print absolute">
+    <Container>
+        <div class="flex flex-wrap gap-y-2 justify-between">
+            <Link href=`http://localhost:4321/${lang}/` underline={false} external = {false} >
+                <div class="Inter">
+                
+                    <img
+                        src={"/LogoAdriaHervas.png"}
+                        alt="Logo Picture"
+                        class="w-8 h-8 object-cover"
+                    />
+                </div>
+            </Link>
+            <nav class="flex gap-3 items-center">
+                <Link
+                    href={`${OppositeUrl}`}
+                    underline={false}
+                    aria-label={oppositeLang === "es"
+                        ? "Cambiar a Español"
+                        : "Switch to English"}
+                >
+                    {`${lang}`}
+                </Link>
+            </nav>
+        </div>
+    </Container>
+</header>

@@ -1,0 +1,160 @@
+---
+import Container from "@components/Container.astro";
+import LandingLayout from "@layouts/LandingLayout.astro";
+import SuscribeNLComponent from "@components/SuscribeNLComponent.astro";
+import { useTranslations } from "@i18n/utils/utils.ts";
+import "@/styles/article.css";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+---
+
+<LandingLayout title={t("nav.cookies")} description={t("nav.cookies")}>
+    <Container>
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8 my-24"
+        >
+            <div class="flex flex-col justify-center space-y-2 no-print w-full">
+                <div class="space-y-1 text-center w-full">
+                    <h1 class="animate InterTitle text-accent text-5xl">
+                        Política de {t("nav.cookies")}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-10 my-16">
+            <section>
+                <article class="animate">
+                    <p class="">
+                        En adriahervas.com (en adelante, "el Sitio Web"), nos
+                        tomamos muy en serio tu privacidad. A continuación, te
+                        informamos sobre el uso de cookies en nuestro sitio.
+                    </p>
+
+                    <h2>¿Qué son las Cookies?</h2>
+                    <p class="">
+                        Las cookies son pequeños archivos de texto que se
+                        almacenan en tu navegador cuando visitas un sitio web.
+                        Su finalidad es permitir que el sitio web recuerde
+                        información sobre tu visita, como tus preferencias, para
+                        que tu próxima visita sea más sencilla y el sitio te
+                        resulte más útil.
+                    </p>
+
+                    <h2>¿Qué tipo de Cookies utilizamos en adriahervas.com?</h2>
+                    <p class="">
+                        Actualmente, en adriahervas.com solo utilizamos cookies
+                        estrictamente esenciales (técnicas). Estas cookies son
+                        indispensables para el correcto funcionamiento del Sitio
+                        Web y para que puedas navegar por él y utilizar sus
+                        funciones básicas.
+                    </p>
+
+                    <p>
+                        Las cookies esenciales no requieren tu consentimiento
+                        expreso, ya que son necesarias para la prestación del
+                        servicio que solicitas al acceder a nuestra web. Su
+                        función principal es:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong
+                                >Permitir la comunicación entre tu equipo y la
+                                red:</strong
+                            > Aseguran que el sitio web se cargue correctamente y
+                            que puedas acceder a sus contenidos.
+                        </li>
+                        <li>
+                            <strong>Gestionar la sesión de usuario:</strong> Mantenerte
+                            conectado mientras navegas por diferentes páginas dentro
+                            del sitio.
+                        </li>
+                        <li>
+                            <strong>Implementar medidas de seguridad:</strong> Ayudan
+                            a detectar y prevenir riesgos de seguridad, garantizando
+                            la protección del sitio y sus usuarios.
+                        </li>
+                        <li>
+                            <strong>Recordar tus preferencias básicas:</strong> Por
+                            ejemplo, si has aceptado o no este aviso de cookies,
+                            para no mostrártelo constantemente.
+                        </li>
+                    </ul>
+
+                    <h2>
+                        ¿Qué cookies esenciales concretas pueden usarse en
+                        adriahervas.com?
+                    </h2>
+                    <p class="">
+                        Aunque la lista exacta puede variar según la
+                        configuración técnica del servidor o plataforma, las
+                        cookies esenciales más comunes que podrían estar
+                        presentes son:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong>Cookies de sesión:</strong> Son temporales y
+                            se eliminan cuando cierras el navegador. Su función es
+                            permitir la navegación fluida y el acceso a áreas seguras
+                            de la web.
+                        </li>
+                        <li>
+                            <strong>Cookies de seguridad:</strong> Se utilizan para
+                            proteger el sitio web de posibles ataques o actividades
+                            maliciosas.
+                        </li>
+                        <li>
+                            <strong>Cookies de preferencias:</strong> Podrían guardar
+                            una preferencia mínima, como tu consentimiento sobre
+                            este aviso de cookies, para que no te aparezca repetidamente.
+                        </li>
+                    </ul>
+
+                    <p>
+                        En ningún caso utilizamos cookies para recopilar
+                        información personal que pueda identificarte
+                        directamente, ni para fines de publicidad, análisis
+                        estadísticos de comportamiento o seguimiento de tu
+                        actividad en otras webs.
+                    </p>
+
+                    <h2>¿Cómo gestionar las Cookies?</h2>
+
+                    <p>
+                        Dado que solo utilizamos cookies esenciales para el
+                        funcionamiento básico del Sitio Web, estas se cargarán
+                        automáticamente al acceder a adriahervas.com.
+                    </p>
+
+                    <p class="">
+                        Aunque estas cookies son necesarias, puedes configurar
+                        tu navegador para que te avise de la recepción de
+                        cookies o para impedir su instalación. No obstante, si
+                        bloqueas estas cookies, es posible que ciertas
+                        funcionalidades del Sitio Web no operen correctamente o
+                        que tu experiencia de navegación se vea limitada.
+                    </p>
+
+                    <h2>Contacto</h2>
+
+                    <p>
+                        Si tienes alguna pregunta sobre nuestra Política de
+                        Cookies, puedes contactar con nosotros a través de
+                        dev@adriahervas.com
+                    </p>
+
+                    <h2>Una última cosilla más...</h2>
+                    <p class="">
+                        Si has aprendido algo aquí cuando leas la newsletter vas
+                        a flipar. &#x2193;
+                    </p>
+                </article>
+            </section>
+
+            <SuscribeNLComponent />
+        </div>
+    </Container>
+</LandingLayout>

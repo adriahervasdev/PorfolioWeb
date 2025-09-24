@@ -24,9 +24,9 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/_profile.ico" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/svg+xml" href="/_profile.ico" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/x-icon" href="/_profile.ico">
+<link rel="icon" type="image/svg+xml" href="/LogoAdriaHervas.ico" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="/LogoAdriaHervas.ico" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/x-icon" href="/LogoAdriaHervas.ico">
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
@@ -81,24 +81,6 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
     const backToPrev = document.getElementById("back-to-prev");
     backToPrev?.addEventListener("click", () => window.history.back());
-
-    const lightThemeButton = document.getElementById("light-theme-button");
-    lightThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "light");
-      toggleTheme(false);
-    });
-
-    const darkThemeButton = document.getElementById("dark-theme-button");
-    darkThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "dark");
-      toggleTheme(true);
-    });
-
-    const systemThemeButton = document.getElementById("system-theme-button");
-    systemThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "system");
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    });
 
     window.matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", event => {
@@ -168,11 +150,13 @@ function toggleTheme(dark) {
   function preloadTheme() {
     const userTheme = localStorage.theme;
 
-    if (userTheme === "light" || userTheme === "dark") {
-      toggleTheme(userTheme === "dark");
-    } else {
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
+    toggleTheme(userTheme === "light");
+
+    // if (userTheme === "light" || userTheme === "dark") {
+      
+    // } else {
+    //   toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // }
   }
 
   document.addEventListener("DOMContentLoaded", () => init());

@@ -1,279 +1,176 @@
 ---
-import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
-import PageLayout from "@layouts/PageLayout.astro";
-import ArrowCard from "@components/ArrowCard.astro";
-import Link from "@components/Link.astro";
-import { dateRange } from "@lib/utils";
+import LandingLayout from "@layouts/LandingLayout.astro";
+import SuscribeNLComponent from "@components/SuscribeNLComponent.astro";
+import "@/styles/article.css";
 import { SITE, HOME, SOCIALS } from "@consts";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const lang = Astro.url.pathname.includes('/en/') ? 'en' : 'es';
-
-const projects = (await getCollection(`projects`))
-  .filter(project => !project.data.draft && project.id.startsWith(`${lang}/`))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
-
-const allprojects = (await getCollection("projects"))
-    .filter((project) => !project.data.draft && project.id.startsWith(`${lang}/`))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const allwork = (await getCollection("work")).sort(
-    (a, b) =>
-        new Date(b.data.dateStart).valueOf() -
-        new Date(a.data.dateStart).valueOf(),
-).filter((work) => work.id.startsWith(`${lang}/`));
-
-const work = await Promise.all(
-    allwork.map(async (item) => {
-        const { Content } = await item.render();
-        return { ...item, Content };
-    }),
-);
-
-const alldegrees = (await getCollection("degree")).sort(
-    (a, b) =>
-        new Date(b.data.dateStart).valueOf() -
-        new Date(a.data.dateStart).valueOf(),
-).filter((dregree) => dregree.id.startsWith(`${lang}/`));
-
-const degree = await Promise.all(
-    alldegrees.map(async (item) => {
-        const { Content } = await item.render();
-        return { ...item, Content };
-    }),
-);
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
 ---
 
-<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+<LandingLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
     <Container>
-        <div class="flex items-center space-x-12 space-y-8">
-            <img
-                src={"../_profile.png"}
-                alt="Profile Picture"
-                class="rounded-full w-40 h-40 object-cover"
-            />
-            <div class="flex flex-col justify-center space-y-2 yes-print">
-                <div class="space-y-1">
-                    <h4 class="animate font-semibold text-black dark:text-white">
-                        Adria Hervas Arocas
-                    </h4>
-                    <p class="animate">Unreal Engine Developer</p>
-                </div>
-                <div class="mt-2">
-                    <p class="text-sm opacity-87">Valencia, España</p>
-                    <p class="text-sm opacity-87">https://adriahervas.com</p>
-                </div>
-            </div>
-            <div class="flex flex-col justify-center space-y-2 no-print">
-                <div class="space-y-1">
-                    <h4 class="animate font-semibold text-black dark:text-white">
-                        Hola, soy Adria
-                    </h4>
-                    <p class="animate text-black dark:text-white">
-                        Unreal Engine Developer 🕹
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8 my-24"
+        >
+            <div class="flex flex-col justify-center space-y-2 no-print w-full">
+                <div class="space-y-1 text-center w-full">
+                    <h1 class="animate InterTitle text-accent text-5xl">
+                        ¿Crees que ganarse la vida como GameDev es jodido?
+                    </h1>
+                    <p
+                        class="animate text-accent text-4xl InterTitle text-accent/45"
+                    >
+                        La respuesta es sí.
                     </p>
-                    <button
-                        onclick="window.print();"
-                        class="animate bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-1 px-3 rounded-md"
-                    >
-                        Descargar CV
-                    </button>
                 </div>
             </div>
         </div>
 
-        {/*Contacto*/}
-        <div class="animate flex justify-center my-4">
-            <ul class="flex flex-wrap gap-2 justify-center">
-                {SOCIALS.map((SOCIAL) => (
-                    <li class="flex gap-x-2 text-nowrap">
-                        <Link
-                            href={SOCIAL.HREF}
-                            external
-                            aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
-                        >
-                            <i class={SOCIAL.ICON} />
-                            {SOCIAL.NAME}
-                        </Link>
-                        {" "}
-                    </li>
-                ))}
-                <li class="line-clamp-1">
-                    <Link
-                        href={`mailto:${SITE.EMAIL}`}
-                        aria-label={`Email ${SITE.NAME}`}
-                    >
-                        <i class="fas fa-envelope"></i>
-                        {SITE.EMAIL}
-                    </Link>
-                </li>
-            </ul>
-        </div>
-
-        <div class="space-y-10">
+        <div class="space-y-10 my-16">
             <section>
-                <article class="space-y-4">
-                    <p class="animate text-black dark:text-white text-sm">
-                        Soy Adria, programador C++ en Unreal Engine con dos años de experiencia en el desarrollo de realidad virtual e innovación. Anteriormente, trabajé durante un año como desarrollador web, formando una base sólida en C++ y otras tecnologías web.
+                <article class="animate">
+                    <p>
+                        Hice lo que se supone que había que hacer. Carrera,
+                        máster y a currar. La carrera de la rata, ya sabes.
                     </p>
-                    <p class="animate text-black dark:text-white text-sm">
-                        Me interesa el sector de los videojuegos, las experiencias inmersivas y cualquier proyecto que pueda enriquecerme como programador de C++. Mi objetivo es continuar mi carrera como desarrollador de C++ en Unreal Engine, contribuyendo a proyectos innovadores y desafiantes donde pueda seguir creciendo y aportando con mis habilidades.
-                    </p>
-                </article>
-            </section>
 
-            {/* Experiencia laboral */}
-            <section class="animate space-y-2">
-                <div
-                    class="flex flex-wrap gap-y-2 items-center justify-between"
-                >
-                    <h5
-                        class="font-semibold text-black dark:text-white text-2xl"
-                    >
-                        Experiencia Laboral
-                    </h5>
-                </div>
-            <ul class="flex flex-col space-y-8">
-                {
-                    work.map((entry, index) => (
+                    <p>
+                        Primero, en una empresa de programación web con C++.
+                        Luego en una de VR con Unreal donde, la verdad, molaba
+                        más. Todo iba bien.
+                    </p>
+
+                    <p>
+                        Hasta que la realidad me echó una jarra de agua fría
+                        encima. Despido. Y a los pocos meses, la empresa quebró.
+                        (Si te soy sincero, la cosa ya olía desde hacía tiempo).
+                    </p>
+
+                    <p>
+                        Ahí llegó el síndrome del impostor. Normal, había vivido
+                        demasiado cómodo.
+                    </p>
+
+                    <p>
+                        Pero de la nada surgió un proyecto. Como freelance (que
+                        suena muy bien). La idea era ser un falso autónomo
+                        mientras buscaba otra cosa. Un plan sin fisuras.
+                    </p>
+
+                    <p>
+                        Problema, lo que puedes imaginar (o no). Le pillé el
+                        gustito a eso de ser "mi propio jefe".
+                    </p>
+
+                    <p>
+                        Con todos sus contras, la libertad de elegir dónde te
+                        metes, desde donde y cuando trabajas, no tiene precio.
+                        Poder decir "no" a proyectos que no iban a ninguna parte
+                        y meterme en fregados tecnológicos que de verdad les
+                        veía sentido.
+                    </p>
+
+                    <p>
+                        Llevar el desarrollo de un sistema multijugador XR para
+                        que 20 personas interactuaran a la vez en una sala de
+                        museo de 1000m². O crear soluciones de gamificación con
+                        cámaras de profundidad.
+                    </p>
+
+                    <p>
+                        He visto la parte bonita de ser freelance. Y también su
+                        lado oscuro. La soledad, la incertidumbre y la señora
+                        Hacienda.
+                    </p>
+
+                    <p>
+                        Por eso con el objetivo de continuar como autónomo. Mi
+                        intención es seguir creando y construyendo experiencias
+                        inmersivas para clientes. Pero, como la mayoría de
+                        desarrolladores siempre he querido tener mi propio
+                        juego. Y en eso estoy, creando mi primer videojuego.
+                    </p>
+
+                    <p>
+                        Todo lo que ocurre en este camino, el del freelance que
+                        sobrevive y el del creador que empieza de cero, lo estoy
+                        contando en una newsletter.
+                    </p>
+
+                    <p>
+                        La cruda realidad de esta industria. La mezcla de la
+                        experiencia profesional con el vértigo de <strong
+                            >crear un juego Indie.</strong
+                        >
+                    </p>
+
+                    <p>
+                        Si te va el morbo de ver cómo se equilibra todo esto,
+                        aprender de las hostias que me voy dando y la
+                        experiencia de cómo construir mi propia libertad como
+                        GameDev,
+                        <strong>Suscríbete aquí ↓</strong>
+                    </p>
+                    <SuscribeNLComponent />
+
+                    <h2>Vale, ¿qué NO es esto?</h2>
+                    <p>
+                        Seamos claros. No soy el tipo que trabajó en Activision
+                        Blizzard. Ni el que programó las físicas de los huevos
+                        de los caballos en Red Dead Redemption 2. (Busca el
+                        vídeo. En serio).
+                    </p>
+                    <p>
+                        Aquí NO encontrarás el "truco definitivo" para crear el
+                        siguiente Stardew Valley. Tampoco la fórmula para ser
+                        programador de Rockstar en 10 días.
+                    </p>
+                    <p>
+                        Si buscas soluciones mágicas, este no es tu sitio. Hazte
+                        un favor y pulsa Ctrl + W.
+                    </p>
+                    <p>
+                        Lo que sí encontrarás es mi realidad. Un email diario de
+                        un tío con experiencia en la industria que está lidiando
+                        con los mismos problemas que tú, ahora mismo. (O en un
+                        futuro)
+                    </p>
+
+                    <SuscribeNLComponent />
+
+                    <h2>¿Por qué un email cada día? ¿Estás loco?</h2>
+                    <p>
+                        Sí, un poco. Es lo que me mantiene en acción. Esto es lo
+                        que te llevas cada mañana con tu café:
+                    </p>
+                    <ul>
                         <li>
-                            {/* Fecha */}
-                            <div class="text-sm opacity-87">
-                                {dateRange(
-                                    entry.data.dateStart,
-                                    entry.data.dateEnd,
-                                )}
-                            </div>
-        
-                            {/* Compañia */}
-                            <div class="font-semibold text-black dark:text-white text-lg">
-                                {entry.data.company}
-                            </div>
-        
-                            {/* Cargo */}
-                            <div class="text-sm opacity-87">
-                                {entry.data.role}
-                            </div>
-        
-                            {/* Contenido */}
-                            <article class="text-black dark:text-white text-sm">
-                                <entry.Content />
-                            </article>
-        
-                            {/* Proyectos */}
-                            {allprojects.filter(
-                                (project) =>
-                                    project.data.company ===
-                                    entry.data.company,
-                            ).length > 0 && (
-                                <div class="space-y-2 yes-print">
-                                    <span class="font-semibold text-black dark:text-white text-sm">
-                                        Proyectos:
-                                    </span>{" "}
-                                    <ul class="list-disc pl-4 space-y-1">
-                                        {allprojects
-                                            .filter(
-                                                (project) =>
-                                                    project.data.company ===
-                                                    entry.data.company,
-                                            )
-                                            .map((project, projectIndex) => (
-                                                <li
-                                                    class="text-sm"
-                                                >
-                                                    <span class="text-black dark:text-white text-sm">
-                                                        {project.data.title}
-                                                    </span>{" "}
-                                                    <span class="opacity-87">
-                                                        {
-                                                            project.data
-                                                                .description
-                                                        }
-                                                    </span>
-                                                </li>
-                                            ))}
-                                    </ul>
-                                </div>
-                            )}
-        
-                            {/* Stack */}
-                            {entry.data.stack &&
-                                entry.data.stack.length > 0 && (
-                                    <div class="text-sm space-y-2 mt-4">
-                                        <span class="font-semibold text-black dark:text-white">
-                                            Stack:
-                                        </span>{" "}
-                                        <span class="opacity-87">
-                                            {entry.data.stack.join(", ")}
-                                        </span>
-                                    </div>
-                                )}
-        
-                            {/* Salto de pagina al descargar CV */}
-                            {index != work.length - 1 && (
-                                <div style="height:0px" class="yes-print"></div>
-                            )}
+                            <strong>Una dosis diaria de realidad.</strong> Un avance,
+                            un bug eterno, una reflexión sobre la industria. Un chute
+                            de 2 minutos para que veas que no estás solo en esta
+                            mierda.
                         </li>
-                    ))
-                }
-            </ul>
-            </section>
-
-            <section class="animate space-y-4 no-print">
-                <div
-                    class="flex flex-wrap gap-y-4 items-center justify-between"
-                >
-                    <h5
-                        class="font-semibold text-black dark:text-white text-2xl"
-                    >
-                        Proyectos
-                    </h5>
-                    <Link href={`/projects/${lang}/`}> Ver todos </Link>
-                </div>
-                <ul class="flex flex-col gap-4">
-                    {
-                        projects.map((project) => (
-                            <li>
-                                <ArrowCard entry={project} />
-                            </li>
-                        ))
-                    }
-                </ul>
-            </section>
-
-            <section class="animate space-y-2">
-                <div
-                    class="flex flex-wrap gap-y-2 items-center justify-between"
-                >
-                    <h5
-                        class="font-semibold text-black dark:text-white text-2xl"
-                    >
-                        Titulaciones
-                    </h5>
-                </div>
-                <ul class="flex flex-col space-y-4">
-                    {
-                        degree.map((entry) => (
-                            <li>
-                                <div class="text-sm opacity-87">
-                                    {dateRange(
-                                        entry.data.dateStart,
-                                        entry.data.dateEnd,
-                                    )}
-                                </div>
-                                <div class="font-semibold text-black dark:text-white">
-                                    {entry.data.name}
-                                </div>
-                                <div class="text-sm opacity-87">
-                                    {entry.data.university}
-                                </div>
-                            </li>
-                        ))
-                    }
-                </ul>
+                        <li>
+                            <strong
+                                >El manual de supervivencia freelance.</strong
+                            > Te cuento cómo consigo clientes, gestiono proyectos
+                            y sobrevivo a Hacienda. Puros dramas.
+                        </li>
+                        <li>
+                            <strong>Atajos nacidos de mis hostias.</strong> Aprenderás
+                            más de mi código roto y mis malas decisiones que de 10
+                            tutoriales fancy.
+                        </li>
+                        <li>
+                            <strong>Es gratis.</strong> Sí, gratis. Y el botón para
+                            darte de baja es tan grande que podrías pulsarlo con
+                            el codo. Si te agobio, te vas. Fin.
+                        </li>
+                    </ul>
+                    <SuscribeNLComponent />
+                </article>
             </section>
         </div>
     </Container>
-</PageLayout>
+</LandingLayout>

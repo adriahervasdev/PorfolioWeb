@@ -1,0 +1,207 @@
+---
+import Container from "@components/Container.astro";
+import LandingLayout from "@layouts/LandingLayout.astro";
+import SuscribeNLComponent from "@components/SuscribeNLComponent.astro";
+import { useTranslations } from "@i18n/utils/utils.ts";
+import "@/styles/article.css";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+---
+
+<LandingLayout title={t("nav.privacy")} description={t("nav.privacy")}>
+    <Container>
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8 my-24"
+        >
+            <div class="flex flex-col justify-center space-y-2 no-print w-full">
+                <div class="space-y-1 text-center w-full">
+                    <h1 class="animate InterTitle text-accent text-5xl">
+                        {t("nav.privacy")}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-10 my-16">
+            <section>
+                <article class="animate">
+                    <p class="">
+                        Your privacy is a priority at adriahervas.com. This
+                        policy details how we manage your personal data,
+                        especially the email addresses you provide us to receive
+                        our communications.
+                    </p>
+
+                    <h2>Who is responsible for processing your data?</h2>
+                    <ul>
+                        <li>
+                            <strong>Owner:</strong> Adrià Hervàs Arocas
+                        </li>
+                        <li><strong>DNI:</strong> 73.591.993-C</li>
+                        <li>
+                            <strong>Contact email:</strong> dev@adriahervas.com
+                        </li>
+                    </ul>
+                    <h2>
+                        What personal data do we collect and for what purpose?
+                    </h2>
+                    <p class="">
+                        At adriahervas.com, we only collect the email address
+                        you voluntarily provide us. The purpose of this
+                        collection is exclusively:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong
+                                >Sending informational communications:</strong
+                            > We will send you emails with blog articles, tutorials,
+                            news, and relevant content about programming, video games,
+                            and design.
+                        </li>
+                        <li>
+                            <strong>Sending commercial communications:</strong> We
+                            may inform you about future online courses or related
+                            services that might be of interest to you.
+                        </li>
+                    </ul>
+
+                    <h2>What is the legal basis for processing your data?</h2>
+                    <p class="">
+                        The legal basis for processing your email address is
+                        your express consent. By providing your email address
+                        and subscribing to our newsletter, you grant us your
+                        consent to send you the aforementioned communications.
+                    </p>
+
+                    <p>
+                        Remember that you can withdraw your consent at any time
+                        by following the instructions found in each email you
+                        receive, or by sending an email to our contact address.
+                    </p>
+
+                    <h2>To whom might your data be transferred?</h2>
+
+                    <p>
+                        For managing email sending, we use the MailerLite
+                        platform. This means your email address will be
+                        transferred to MailerLite so we can send you
+                        communications.
+                    </p>
+
+                    <p class="">
+                        MailerLite, as a service provider, is committed to
+                        complying with the data protection regulations of the
+                        European Union. The relationship with MailerLite is
+                        covered by a data processing agreement, which guarantees
+                        that your data will be processed with the utmost
+                        security and in accordance with current legislation.
+                    </p>
+
+                    <p>
+                        We do not share or transfer your personal data to any
+                        other third party for commercial purposes, or for any
+                        other purpose than sending the requested communications.
+                    </p>
+
+                    <h2>How long do we retain your data?</h2>
+
+                    <p>
+                        We will retain your email address as long as you
+                        maintain your subscription to our newsletter. The moment
+                        you decide to unsubscribe, we will permanently remove
+                        your data from our mailing list.
+                    </p>
+
+                    <h2>What are your rights as a data subject?</h2>
+
+                    <p>
+                        In accordance with the General Data Protection
+                        Regulation (GDPR) and the Organic Law on Data Protection
+                        and Guarantee of Digital Rights (LOPDGDD), you have the
+                        right to:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong>Access:</strong> Know what data of yours we are
+                            processing.
+                        </li>
+                        <li>
+                            <strong>Rectification:</strong> Request the modification
+                            of your data if it is inaccurate or incomplete.
+                        </li>
+                        <li>
+                            <strong>Erasure (right to be forgotten):</strong> Request
+                            the deletion of your data when, among other reasons,
+                            it is no longer necessary for the purposes for which
+                            it was collected.
+                        </li>
+                        <li>
+                            <strong>Restriction of processing:</strong> Request the
+                            restriction of the processing of your data, in which
+                            case we will only retain it for the exercise or defense
+                            of claims.
+                        </li>
+                        <li>
+                            <strong>Objection:</strong> Object to the processing
+                            of your data for reasons related to your particular situation.
+                            In this case, we will stop processing your data, except
+                            for compelling legitimate reasons or the exercise or
+                            defense of possible claims.
+                        </li>
+                        <li>
+                            <strong>Data portability: </strong> Receive the personal
+                            data you have provided us in a structured, commonly used,
+                            and machine-readable format, and to transmit it to another
+                            controller if the processing is based on consent or a
+                            contract.
+                        </li>
+                    </ul>
+
+                    <p>
+                        You can exercise these rights by sending an email to
+                        dev@adriahervas.com.
+                    </p>
+
+                    <p>
+                        Furthermore, you have the right to file a complaint with
+                        the Spanish Data Protection Agency (AEPD) if you believe
+                        your rights have not been respected.
+                    </p>
+
+                    <h2>Security Measures</h2>
+
+                    <p>
+                        At adriahervas.com, we are committed to protecting your
+                        personal information. We have adopted the necessary
+                        technical and organizational measures to guarantee the
+                        security of your data, preventing its alteration, loss,
+                        unauthorized processing, or access, taking into account
+                        the state of technology, the nature of the stored data,
+                        and the risks to which they are exposed.
+                    </p>
+
+                    <h2>Changes to the Privacy Policy</h2>
+
+                    <p>
+                        We reserve the right to modify this Privacy Policy to
+                        adapt it to legislative or jurisprudential developments,
+                        as well as industry practices. Any significant
+                        modification will be communicated on the Website or
+                        through the usual means of communication with users.
+                    </p>
+
+                    <h2>The most important thing...</h2>
+                    <p class="">
+                        If you've read this, you're gonna flip when you read the
+                        newsletter! &#x2193;
+                    </p>
+                </article>
+            </section>
+
+            <SuscribeNLComponent />
+        </div>
+    </Container>
+</LandingLayout>

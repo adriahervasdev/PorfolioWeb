@@ -1,0 +1,29 @@
+---
+import { useTranslations } from "@i18n/utils/utils.ts";
+import MailerLiteForm from '@components/SuscribeNLComponent.tsx';
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+
+const translationsProps = {
+  suscribise: t("nav.suscribise"),
+  checkPrivacy: t("nav.checkPrivacy"),
+  errorForm1: t("nav.errorForm1"),
+  errorForm2: t("nav.errorForm2"),
+  errorForm3: t("nav.errorForm3"),
+  privacity1: t("nav.privacity1"),
+  privacity2: t("nav.privacity2"),
+};
+---
+<MailerLiteForm client:load lang={lang} t={translationsProps} />
+
+<script
+        is:inline
+        src="https://groot.mailerlite.com/js/w/webforms.min.js?v176e10baa5e7ed80d35ae235be3d5024"
+        type="text/javascript"></script>
+    <script is:inline>
+        fetch(
+            "https://assets.mailerlite.com/jsonp/1607083/forms/157651417861981447/takel",
+        );
+    </script>
+

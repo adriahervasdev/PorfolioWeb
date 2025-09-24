@@ -1,7 +1,7 @@
 import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
-    NAME: "Adria Hervas",
+    NAME: "Adrià Hervàs",
     EMAIL: "adriahervas.dev@gmail.com",
     NUM_POSTS_ON_HOMEPAGE: 3,
     NUM_WORKS_ON_HOMEPAGE: 2,
@@ -28,25 +28,20 @@ export const PROJECTS: Metadata = {
     DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
 };
 
-export const TECNOLOGIES = {
-    "C++": "/Icons/cplusplus.png",
-    "Qt": "/Icons/qt.png",
-    "Unreal Engine": "/Icons/unrealengine.png",
-    "Git": "/Icons/git.png",
-    "Python": "/Icons/python.png",
-    "Js": "/Icons/js.png",
-    "HTML": "/Icons/html.png",
-    "SVN": "/Icons/svn.png",
-    "CSS": "/Icons/css.png",
-    "PostgreSQL": "/Icons/postgresql.png",
-    "PHP": "/Icons/php.png",
-    "Google Cloud": "/Icons/googlecloud.png",
-    "Singleplayer": "/Icons/singleplayer.png",
-    "Multiplayer": "/Icons/multiplayer.png",
-    "IOS": "/Icons/ios.png",
-    "Android": "/Icons/android.png",
-    "Oculus": "/Icons/oculus.png",
-    "Play Canvas": "/Icons/playcanvas.png",
+export const CATEGORIES_NAMES = [
+    "latest",
+    "cplusplus",
+    "unreal",
+    "multiplayer",
+    "xr",
+] as const
+
+export const CATEGORIES = {
+    "latest": "/Icons/cplusplus.png",
+    "cplusplus": "/Icons/cplusplus.png",
+    "unreal": "/Icons/unrealengine.png",
+    "multiplayer": "/Icons/multiplayer.png",
+    "xr": "/Icons/XR.png",
 };
 
 export const SOCIALS: Socials = [

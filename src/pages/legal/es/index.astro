@@ -1,0 +1,127 @@
+---
+import Container from "@components/Container.astro";
+import LandingLayout from "@layouts/LandingLayout.astro";
+import SuscribeNLComponent from "@components/SuscribeNLComponent.astro";
+import { useTranslations } from "@i18n/utils/utils.ts";
+import "@/styles/article.css";
+import Link from "@components/Link.astro";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+---
+
+<LandingLayout title={t("nav.legal")} description={t("nav.legal")}>
+    <Container>
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8 my-24"
+        >
+            <div class="flex flex-col justify-center space-y-2 no-print w-full">
+                <div class="space-y-1 text-center w-full">
+                    <h1 class="animate InterTitle text-accent text-5xl">
+                        {t("nav.legal")}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-10 my-16">
+            <section>
+                <article class="animate">
+                    <p class="">
+                        La utilización del portal adriahervas.com está sujeta a
+                        las siguientes condiciones de uso.
+                    </p>
+
+                    <h2>Objetivo de adriahervas.com</h2>
+                    <p class="">
+                        Mi principal objetivo con esta plataforma es compartir
+                        conocimiento y experiencias en el ámbito de la
+                        programación, los videojuegos y el diseño. A través de
+                        mis publicaciones y, en el futuro, de formaciones
+                        online, busco proporcionar recursos valiosos que te
+                        ayuden a crecer y mejorar tus capacidades en estas
+                        disciplinas.
+                    </p>
+
+                    <h2>Identidad y titularidad de la web</h2>
+                    <ul>
+                        <li>
+                            <strong>Titular:</strong> Adrià Hervàs Arocas
+                        </li>
+                        <li><strong>DNI:</strong> 73.591.993-C</li>
+                        <li>
+                            <strong>Correo de contacto:</strong> dev@adriahervas.com
+                        </li>
+                        <li>
+                            <strong>Actividad Principal:</strong> Blogging, divulgación
+                            de contenido técnico, potencial oferta de cursos online.
+                        </li>
+                    </ul>
+
+                    <p>
+                        Me comprometo a gestionar tu información personal con la
+                        máxima garantía de seguridad y a cumplir con todas las
+                        exigencias de la normativa española y europea vigente en
+                        materia de protección de datos. Esta web opera bajo los
+                        principios de la Ley Orgánica 3/2018, de 5 de diciembre,
+                        de Protección de Datos Personales y garantía de los
+                        derechos digitales (LOPDGDD), y el Reglamento General de
+                        Protección de Datos (RGPD) de la Unión Europea.
+                    </p>
+
+                    <h2>Propiedad intelectual</h2>
+                    <p class="">
+                        De acuerdo con lo establecido en la Ley de Propiedad
+                        Intelectual española (artículos 8 y 32.1, segundo
+                        párrafo), todo el contenido visual y textual de
+                        adriahervas.com, incluyendo artículos, imágenes,
+                        gráficos y el diseño general de la web, es de mi
+                        exclusiva autoría y está protegido por derechos de
+                        propiedad intelectual.
+                    </p>
+
+                    <p>
+                        De acuerdo con lo establecido en la Ley de Propiedad
+                        Intelectual española (artículos 8 y 32.1, segundo
+                        párrafo), todo el contenido visual y textual de
+                        adriahervas.com, incluyendo artículos, imágenes,
+                        gráficos y el diseño general de la web, es de mi
+                        exclusiva autoría y está protegido por derechos de
+                        propiedad intelectual.
+                    </p>
+
+                    <h2>Enlaces a Otros Sitios Web</h2>
+                    <p class="">
+                        Es posible que encuentres enlaces a otras páginas web en
+                        adriahervas.com. Estos enlaces se incluyen para ampliar
+                        información o facilitar el acceso a recursos externos
+                        relevantes. Sin embargo, no ejerzo control alguno sobre
+                        el contenido o las políticas de privacidad de esos
+                        sitios externos, y por tanto, no asumo responsabilidad
+                        alguna sobre ellos. Te recomiendo que, al salir de
+                        adriahervas.com, revises siempre las políticas legales
+                        de cualquier otro sitio que visites.
+                    </p>
+
+                    <h2>Pólitica de Privacidad</h2>
+                    <Link href={`/privacy/${lang}/`}>
+                        Para ir a la Política de Privacidad click aquí.
+                    </Link>
+
+                    <h2>Pólitica de Cookies</h2>
+                    <Link href={`/cookies/${lang}/`}>
+                        Para ir a la Política de Cookies click aquí.
+                    </Link>
+
+                    <h2>Vas a flipar si...</h2>
+                    <p class="">
+                        Si te has leído esto cuando leas la newsletter vas a
+                        flipar. &#x2193;
+                    </p>
+                </article>
+            </section>
+
+            <SuscribeNLComponent />
+        </div>
+    </Container>
+</LandingLayout>

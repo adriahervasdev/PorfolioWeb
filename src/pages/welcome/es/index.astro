@@ -1,0 +1,85 @@
+---
+import Container from "@components/Container.astro";
+import LandingLayout from "@layouts/LandingLayout.astro";
+import "@/styles/article.css";
+import Link from "@components/Link.astro";
+import { HOME } from "@consts";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+---
+
+<LandingLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+    <Container>
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8 mt-24"
+        >
+            <div class="flex flex-col justify-center space-y-2 no-print w-full">
+                <div class="space-y-1 text-center w-full">
+                    <h1 class="animate InterTitle text-accent text-5xl pb-6">
+                        Hecho. Ya estás dentro.
+                    </h1>
+                    <img
+                        src={"/MarioGift.gif"}
+                        alt="Profile Picture"
+                        class="w-full h-52 object-cover animate"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-10">
+            <section>
+                <article class="animate">
+                    <p>
+                        Vale, antes de que te vayas a seguir con tu vida, dos
+                        cosas rápidas:
+                    </p>
+                    <h2>
+                        1. Evita que mis correos acaben en el gulag de "Spam".
+                    </h2>
+                    <p class="">
+                        Tu gestor de correo (Gmail, Outlook y compañía) a veces
+                        se pone nervioso con los nuevos remitentes. Para decirle
+                        que soy de fiar, tienes dos opciones:
+                    </p>
+                    <ul>
+                        <li>
+                            La fácil: Agrega mi dirección (dev@adriahervas.com)
+                            a tus contactos. Problema resuelto.
+                        </li>
+                        <li>
+                            La que me ayuda a mí: <strong
+                                >Respóndeme al primer correo que te llegue.</strong
+                            > Si no sabes que escribir prueba con: "Hola soy X, me
+                            dedico a Y, me he suscrito por Z". Así tu gestor entiende
+                            que esto es una conversación real. Y a mí me sirve para
+                            ubicarte y saber de ti.
+                        </li>
+                    </ul>
+                    <h2>2. ¿En qué punto del caos está el proyecto?</h2>
+                    <p class="">Me has pillado justo al principio de todo.</p>
+                    <p>
+                        El proyecto ahora mismo es un documento en blanco y un
+                        montón de ideas caóticas. Estoy en la "Fase 0: El
+                        Vértigo del Lienzo en Blanco". Definiendo la idea
+                        principal, las mecánicas y rezando para que todo esto
+                        tenga sentido.
+                    </p>
+                    <p>
+                        Así que vas a ver el viaje completo. Desde la primera
+                        línea de código hasta (con suerte) el botón de "Publicar
+                        en Steam".
+                    </p>
+                    <h3>¿Te aburres y quieres saber más?</h3>
+                    <p>
+                        También tengo un blog por si quieres echarle un ojo.
+                        Click aquí abajo &#x2193;
+                    </p>
+                    <Link href={`/posts/${lang}/1`}>
+                        Blog de un desarrollador de Unreal Engine.
+                    </Link>
+                </article>
+            </section>
+        </div>
+    </Container>
+</LandingLayout>

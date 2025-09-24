@@ -1,0 +1,218 @@
+---
+import Container from "@components/Container.astro";
+import LandingLayout from "@layouts/LandingLayout.astro";
+import SuscribeNLComponent from "@components/SuscribeNLComponent.astro";
+import { useTranslations } from "@i18n/utils/utils.ts";
+import "@/styles/article.css";
+
+const lang = Astro.url.pathname.includes("/en/") ? "en" : "es";
+const t = useTranslations(lang);
+---
+
+<LandingLayout title={t("nav.privacy")} description={t("nav.privacy")}>
+    <Container>
+        <div
+            class="flex flex-col items-center sm:flex-row sm:space-x-12 sm:space-y-0 space-y-8 my-24"
+        >
+            <div class="flex flex-col justify-center space-y-2 no-print w-full">
+                <div class="space-y-1 text-center w-full">
+                    <h1 class="animate InterTitle text-accent text-5xl">
+                        {t("nav.privacy")}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-10 my-16">
+            <section>
+                <article class="animate">
+                    <p class="">
+                        Tu privacidad es una prioridad en adriahervas.com. Esta
+                        política detalla cómo gestionamos tus datos personales,
+                        especialmente los correos electrónicos que nos
+                        proporcionas para recibir nuestras comunicaciones.
+                    </p>
+
+                    <h2>
+                        ¿Quién es el responsable del tratamiento de tus datos?
+                    </h2>
+                    <ul>
+                        <li>
+                            <strong>Titular:</strong> Adrià Hervàs Arocas
+                        </li>
+                        <li><strong>DNI:</strong> 73.591.993-C</li>
+                        <li>
+                            <strong>Correo de contacto:</strong> dev@adriahervas.com
+                        </li>
+                    </ul>
+                    <h2>
+                        ¿Qué datos personales recopilamos y con qué finalidad?
+                    </h2>
+                    <p class="">
+                        En adriahervas.com, solo recopilamos la dirección de
+                        correo electrónico que nos proporcionas voluntariamente.
+                        La finalidad de esta recopilación es exclusivamente:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong
+                                >Envío de comunicaciones de divulgación:</strong
+                            > Te enviaremos correos electrónicos con artículos de
+                            blog, tutoriales, noticias y contenido relevante sobre
+                            programación, videojuegos y diseño.
+                        </li>
+                        <li>
+                            <strong>Envío de comunicaciones comerciales:</strong
+                            > Podremos informarte sobre futuros cursos online o servicios
+                            relacionados que puedan ser de tu interés.
+                        </li>
+                    </ul>
+
+                    <h2>
+                        ¿Cuál es la legitimación para el tratamiento de tus
+                        datos?
+                    </h2>
+                    <p class="">
+                        La base legal para el tratamiento de tu correo
+                        electrónico es tu consentimiento expreso. Al
+                        proporcionar tu dirección de correo electrónico y
+                        suscribirte a nuestra newsletter, nos otorgas tu
+                        consentimiento para enviarte las comunicaciones
+                        mencionadas.
+                    </p>
+
+                    <p>
+                        Recuerda que puedes retirar tu consentimiento en
+                        cualquier momento siguiendo las instrucciones que
+                        encontrarás en cada correo electrónico que recibas, o
+                        enviando un email a nuestra dirección de contacto.
+                    </p>
+
+                    <h2>¿A quién se pueden ceder tus datos?</h2>
+
+                    <p>
+                        Para la gestión del envío de correos electrónicos,
+                        utilizamos la plataforma MailerLite. Esto implica que tu
+                        dirección de correo electrónico se transferirá a
+                        MailerLite para que podamos enviarte las comunicaciones.
+                    </p>
+
+                    <p class="">
+                        MailerLite, como proveedor de servicios, está
+                        comprometido con el cumplimiento de las normativas de
+                        protección de datos de la Unión Europea. La relación con
+                        MailerLite está amparada por un contrato de encargado
+                        del tratamiento, que garantiza que tus datos serán
+                        tratados con la máxima seguridad y conforme a la
+                        legislación vigente.
+                    </p>
+
+                    <p>
+                        No compartimos ni cedemos tus datos personales a ningún
+                        otro tercero para fines comerciales, ni para ningún otro
+                        propósito que no sea el envío de las comunicaciones
+                        solicitadas.
+                    </p>
+
+                    <h2>¿Cuánto tiempo conservamos tus datos?</h2>
+
+                    <p>
+                        Conservaremos tu dirección de correo electrónico
+                        mientras mantengas tu suscripción a nuestra newsletter.
+                        En el momento en que decidas darte de baja, eliminaremos
+                        tus datos de nuestra lista de correo de forma
+                        permanente.
+                    </p>
+
+                    <h2>¿Cuáles son tus derechos como titular de los datos?</h2>
+
+                    <p>
+                        Conforme al Reglamento General de Protección de Datos
+                        (RGPD) y la Ley Orgánica de Protección de Datos y
+                        Garantía de los Derechos Digitales (LOPDGDD), tienes
+                        derecho a:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong>Acceso:</strong> Conocer qué datos tuyos estamos
+                            tratando.
+                        </li>
+                        <li>
+                            <strong>Rectificación:</strong> Solicitar la modificación
+                            de tus datos si son inexactos o incompletos.
+                        </li>
+                        <li>
+                            <strong>Supresión (olvido):</strong> Pedir la eliminación
+                            de tus datos cuando, entre otros motivos, ya no sean
+                            necesarios para los fines por los que fueron recogidos.
+                        </li>
+                        <li>
+                            <strong>Limitación del tratamiento:</strong> Solicitar
+                            la limitación del tratamiento de tus datos, en cuyo caso
+                            solo los conservaremos para el ejercicio o la defensa
+                            de reclamaciones.
+                        </li>
+                        <li>
+                            <strong>Oposición:</strong> Oponerte al tratamiento de
+                            tus datos por motivos relacionados con tu situación particular.
+                            En este caso, dejaremos de tratar tus datos, salvo por
+                            motivos legítimos imperiosos o el ejercicio o la defensa
+                            de posibles reclamaciones.
+                        </li>
+                        <li>
+                            <strong>Portabilidad: </strong> Recibir los datos personales
+                            que nos hayas facilitado en un formato estructurado,
+                            de uso común y lectura mecánica, y a transmitirlos a
+                            otro responsable si el tratamiento se basa en el consentimiento
+                            o un contrato.
+                        </li>
+                    </ul>
+
+                    <p>
+                        Puedes ejercer estos derechos enviando a dev@adriahervas.com un correo
+                        electrónico.
+                    </p>
+
+                    <p>
+                        Asimismo, tienes derecho a presentar una reclamación
+                        ante la Agencia Española de Protección de Datos (AEPD)
+                        si consideras que tus derechos no han sido respetados.
+                    </p>
+
+                    <h2>Medidas de seguridad</h2>
+
+                    <p>
+                        En adriahervas.com, nos comprometemos a proteger tu
+                        información personal. Hemos adoptado las medidas
+                        técnicas y organizativas necesarias para garantizar la
+                        seguridad de tus datos, evitar su alteración, pérdida,
+                        tratamiento o acceso no autorizado, teniendo en cuenta
+                        el estado de la tecnología, la naturaleza de los datos
+                        almacenados y los riesgos a los que están expuestos.
+                    </p>
+
+                    <h2>Cambios en la Política de Privacidad</h2>
+
+                    <p>
+                        Nos reservamos el derecho de modificar esta Política de
+                        Privacidad para adaptarla a novedades legislativas o
+                        jurisprudenciales, así como a las prácticas de la
+                        industria. Cualquier modificación significativa será
+                        comunicada en el Sitio Web o a través de los medios
+                        habituales de comunicación con los usuarios.
+                    </p>
+
+                    <h2>La cosa más importante...</h2>
+                    <p class="">
+                        Si te has leído esto cuando leas la newsletter vas
+                        a flipar. &#x2193;
+                    </p>
+                </article>
+            </section>
+
+            <SuscribeNLComponent />
+        </div>
+    </Container>
+</LandingLayout>

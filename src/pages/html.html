@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería 3D con Modelo GLB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <style>
+        /* Estilos (sin cambios) */
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-close-button:hover,
+        .modal-close-button:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        #modal-canvas-container {
+            width: 100%;
+            height: 350px;
+            margin-bottom: 1rem;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: grab;
+        }
+
+        #modal-canvas-container:active {
+            cursor: grabbing;
+        }
+
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .pagination-button,
+        .pagination-number {
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background-color: white;
+            color: #337ab7;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .pagination-button:hover,
+        .pagination-number:hover {
+            background-color: #eee;
+        }
+
+        .pagination-button:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+            background-color: #f9f9f9;
+        }
+
+        .pagination-number.active {
+            background-color: #337ab7;
+            color: white;
+            border-color: #337ab7;
+            cursor: default;
+        }
+
+        .preview-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-white shadow-md py-6">
+        <h1 class="text-3xl font-bold text-center text-gray-700">Galería 3D con Modelo GLB</h1>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        </div>
+        <div id="pagination-controls" class="pagination-controls">
+        </div>
+    </main>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close-button" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title" class="text-2xl InterTitle mb-4">Detalles del Objeto</h2>
+            <div id="modal-canvas-container"></div>
+            <div id="modal-details">
+                <h3 class="text-lg font-medium mb-2">Características:</h3>
+                <p id="modal-description" class="text-gray-600"></p>
+                <p class="mt-2"><strong>Tipo:</strong> <span id="modal-type"></span></p>
+                <p id="modal-color-container" class="mt-2"><strong>Color:</strong> <span id="modal-color"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuración Inicial ---
+        const gallery = document.getElementById('gallery');
+        const paginationControls = document.getElementById('pagination-controls');
+        const modal = document.getElementById('detailModal');
+        const modalCanvasContainer = document.getElementById('modal-canvas-container');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalType = document.getElementById('modal-type');
+        const modalColorContainer = document.getElementById('modal-color-container');
+        const modalColor = document.getElementById('modal-color');
+
+        // --- Detalles de los Objetos ---
+        const objectDetails = [
+            // Modelo GLB
+            { id: 'sofa', name: 'Sofá Moderno', description: 'Un modelo 3D detallado de un sofá.', url: 'sofa.glb', type: 'Modelo GLB' },
+            { id: 'sillon', name: 'Sillón Moderno', description: 'Sillón Moderno.', url: 'sillon.glb', type: 'Modelo GLB' },
+            { id: 'taza', name: 'Taza Moderna', description: 'Taza Moderna.', url: 'taza.glb', type: 'Modelo GLB' },
+            { id: 'estanteria', name: 'Estantería madera clara', description: 'Estantería de madera clara con huecos irregulares estilizado.', url: 'estanteria.glb', type: 'Modelo GLB' },
+            // Geometrías anteriores
+            { id: 'cube', name: 'Cubo Azul', description: 'Un cubo básico con seis caras cuadradas.', geometry: new THREE.BoxGeometry(1, 1, 1), color: 0x0095DD, colorName: 'Azul', type: 'Geometría Básica' },
+            { id: 'sphere', name: 'Esfera Roja', description: 'Una esfera perfectamente redonda.', geometry: new THREE.SphereGeometry(0.7, 32, 32), color: 0xFF4136, colorName: 'Rojo', type: 'Geometría Básica' },
+            { id: 'cone', name: 'Cono Verde', description: 'Forma cónica con una base circular.', geometry: new THREE.ConeGeometry(0.6, 1.2, 32), color: 0x2ECC40, colorName: 'Verde', type: 'Geometría Básica' },
+            { id: 'torus', name: 'Toro Amarillo', description: 'Forma de anillo o dona.', geometry: new THREE.TorusGeometry(0.5, 0.2, 16, 100), color: 0xFFDC00, colorName: 'Amarillo', type: 'Geometría Básica' },
+            { id: 'dodecahedron', name: 'Dodecaedro Púrpura', description: 'Poliedro con doce caras pentagonales.', geometry: new THREE.DodecahedronGeometry(0.8), color: 0xB10DC9, colorName: 'Púrpura', type: 'Geometría Básica' },
+            { id: 'cylinder', name: 'Cilindro Naranja', description: 'Forma con dos bases circulares paralelas.', geometry: new THREE.CylinderGeometry(0.5, 0.5, 1, 32), color: 0xFF851B, colorName: 'Naranja', type: 'Geometría Básica' },
+            { id: 'icosahedron', name: 'Icosaedro Cian', description: 'Poliedro con veinte caras triangulares.', geometry: new THREE.IcosahedronGeometry(0.8), color: 0x7FDBFF, colorName: 'Cian', type: 'Geometría Básica' },
+            { id: 'octahedron', name: 'Octaedro Lima', description: 'Poliedro con ocho caras triangulares.', geometry: new THREE.OctahedronGeometry(0.9), color: 0x01FF70, colorName: 'Lima', type: 'Geometría Básica' },
+            { id: 'tetrahedron', name: 'Tetraedro Gris', description: 'Poliedro con cuatro caras triangulares.', geometry: new THREE.TetrahedronGeometry(0.9), color: 0xAAAAAA, colorName: 'Gris', type: 'Geometría Básica' },
+            { id: 'torusknot', name: 'Nudo Toroidal Magenta', description: 'Una forma de nudo tridimensional más compleja.', geometry: new THREE.TorusKnotGeometry(0.6, 0.15, 100, 16), color: 0xF012BE, colorName: 'Magenta', type: 'Geometría Básica' },
+            { id: 'pillar', name: 'Pilar Índigo', description: 'Un pilar rectangular alto.', geometry: new THREE.BoxGeometry(0.6, 1.5, 0.6), color: 0x4B0082, colorName: 'Índigo', type: 'Geometría Básica' },
+            { id: 'lathe', name: 'Jarrón Torneado Marrón', description: 'Forma generada por rotación de puntos.', geometry: new THREE.LatheGeometry(Array.from({ length: 10 }, (_, i) => new THREE.Vector2(Math.sin(i * 0.2) * 0.3 + 0.5, (i - 5) * 0.15)), 32), color: 0x8B4513, colorName: 'Marrón', type: 'Geometría Básica' },
+            { id: 'ring', name: 'Anillo Plateado', description: 'Un anillo plano con un agujero interior.', geometry: new THREE.RingGeometry(0.4, 0.8, 32), color: 0xC0C0C0, colorName: 'Plateado', type: 'Geometría Básica' }
+        ];
+
+        let galleryScenes = []; // Array para las escenas de la galería (solo página actual)
+        let modalScene, modalCamera, modalRenderer, modalMesh, modalControls, modalAnimationId; // Variables para la escena del modal
+
+        // --- Configuración de Paginación ---
+        const itemsPerPage = 6;
+        let currentPage = 1;
+        let totalPages = Math.ceil(objectDetails.length / itemsPerPage);
+
+        // --- Función para centrar y escalar modelo GLTF ---
+        function fitModelToFrame(model, desiredSize = 1.5) {
+            // (Sin cambios)
+            const box = new THREE.Box3().setFromObject(model);
+            const size = box.getSize(new THREE.Vector3());
+            const center = box.getCenter(new THREE.Vector3());
+            const maxDim = Math.max(size.x, size.y, size.z);
+            if (maxDim === 0) return model;
+            const scale = desiredSize / maxDim;
+            model.scale.multiplyScalar(scale);
+            box.setFromObject(model);
+            box.getCenter(center);
+            model.position.sub(center);
+            return model;
+        }
+
+
+        // --- Función para crear una escena 3D para la galería ---
+        function createGalleryScene(cardBody, details) {
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xffffff);
+
+            const camera = new THREE.PerspectiveCamera(110, cardBody.clientWidth / cardBody.clientHeight, 0.1, 1000);
+            camera.position.z = 2;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: false });
+            renderer.setSize(cardBody.clientWidth || 200, cardBody.clientHeight || 200);
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.5;
+            // renderer.outputEncoding = THREE.sRGBEncoding;
+            cardBody.appendChild(renderer.domElement);
+
+            let meshOrModel;
+            let previewAnimationId;
+            let rotateSpeed = 0.005;
+
+            function animatePreview() {
+                previewAnimationId = requestAnimationFrame(animatePreview);
+                if (meshOrModel) {
+                    meshOrModel.rotation.y += rotateSpeed;
+                }
+                renderer.render(scene, camera);
+            }
+
+            if (details.url) {
+                // --- Cargar Modelo GLB ---
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.className = 'preview-loading';
+                loadingIndicator.textContent = 'Cargando...';
+                cardBody.appendChild(loadingIndicator);
+            
+
+                const loader = new THREE.GLTFLoader();
+                loader.load(
+                    details.url,
+                    (gltf) => {
+                        if (loadingIndicator.parentNode) {
+                            loadingIndicator.parentNode.removeChild(loadingIndicator);
+                        }
+
+                        meshOrModel = gltf.scene;
+
+                        // Reemplazar materiales para que no les afecte la luz
+                        meshOrModel.traverse((child) => {
+                            if (child.isMesh) {
+                                const oldMat = child.material;
+                                child.material = new THREE.MeshBasicMaterial({
+                                    color: oldMat.color || 0xffffff,
+                                    map: oldMat.map || null,
+                                    transparent: oldMat.transparent || false,
+                                    opacity: oldMat.opacity !== undefined ? oldMat.opacity : 1,
+                                    side: THREE.DoubleSide // opcional
+                                });
+                            }
+                        });
+
+                        fitModelToFrame(meshOrModel, 1.8);
+                        scene.add(meshOrModel);
+                        details.loadedModel = meshOrModel;
+
+                        const sceneEntry = galleryScenes.find(s => s.scene === scene);
+                        if (sceneEntry) {
+                            sceneEntry.mesh = meshOrModel;
+                        }
+
+                        if (!previewAnimationId) animatePreview();
+                    },
+                    undefined,
+                    (error) => {
+                        console.error(`Error loading GLB ${details.url}:`, error);
+                        if (loadingIndicator.parentNode) {
+                            loadingIndicator.textContent = 'Error al cargar';
+                            loadingIndicator.style.color = 'red';
+                        }
+                    }
+                );
+
+            } else {
+                // --- Crear Geometría Básica ---
+                const material = new THREE.MeshBasicMaterial({
+                    color: details.color,
+                    // Para geometrías planas como RingGeometry, mostrar ambas caras
+                    side: details.geometry instanceof THREE.RingGeometry ? THREE.DoubleSide : THREE.FrontSide
+                });
+                meshOrModel = new THREE.Mesh(details.geometry.clone(), material);
+                meshOrModel.rotation.x = 0.2;
+                meshOrModel.rotation.y = -0.3;
+                scene.add(meshOrModel);
+                animatePreview();
+            }
+
+            galleryScenes.push({ scene, camera, renderer, mesh: meshOrModel, container: cardBody });
+
+            // Función de limpieza (sin cambios)
+            return () => {
+                if (previewAnimationId) cancelAnimationFrame(previewAnimationId);
+                if (renderer.domElement.parentNode) {
+                    renderer.domElement.parentNode.removeChild(renderer.domElement);
+                }
+                renderer.dispose();
+            };
+        }
+
+        // --- Función para crear una tarjeta de la galería ---
+        function createGalleryCard(details) {
+            // (Sin cambios)
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-lg overflow-hidden flex flex-col';
+            const previewContainer = document.createElement('div');
+            previewContainer.className = 'aspect-square w-full cursor-pointer relative';
+            card.appendChild(previewContainer);
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'p-4 border-t border-gray-200';
+            const button = document.createElement('button');
+            button.textContent = 'Ver detalles';
+            button.className = 'w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200';
+            button.onclick = () => openModal(details);
+            buttonContainer.appendChild(button);
+            card.appendChild(buttonContainer);
+            gallery.appendChild(card);
+            const cleanupFunction = createGalleryScene(previewContainer, details);
+            card.dataset.cleanup = cleanupFunction;
+            return cleanupFunction;
+        }
+
+
+        // --- Inicializar la escena del Modal ---
+        function initModalScene() {
+            modalScene = new THREE.Scene();
+            modalScene.background = new THREE.Color(0xe0e0e0);
+
+            modalCamera = new THREE.PerspectiveCamera(60, modalCanvasContainer.clientWidth / modalCanvasContainer.clientHeight, 0.1, 1000);
+
+            modalRenderer = new THREE.WebGLRenderer({ antialias: true });
+            modalRenderer.setSize(modalCanvasContainer.clientWidth, modalCanvasContainer.clientHeight);
+            modalRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+            modalRenderer.toneMappingExposure = 1.5;
+            // modalRenderer.outputEncoding = THREE.sRGBEncoding;
+            modalCanvasContainer.appendChild(modalRenderer.domElement);
+
+            modalControls = new THREE.OrbitControls(modalCamera, modalRenderer.domElement);
+            modalControls.enableDamping = true;
+            modalControls.dampingFactor = 0.05;
+            modalControls.screenSpacePanning = false;
+            modalControls.minDistance = 4;
+            modalControls.maxDistance = 8;
+            // Restringir cámara para no ver desde abajo
+            modalControls.maxPolarAngle = Math.PI / 2;
+
+            modalControls.update();
+        }
+
+        // --- Función para animar la escena del Modal ---
+        function animateModal() {
+            // (Sin cambios)
+            modalAnimationId = requestAnimationFrame(animateModal);
+            modalControls.update();
+            modalRenderer.render(modalScene, modalCamera);
+        }
+
+        // --- Función para abrir el Modal ---
+        function openModal(details) {
+            // (Sin cambios en la lógica principal)
+            if (modalMesh) {
+                modalScene.remove(modalMesh);
+                if (modalMesh.geometry) modalMesh.geometry.dispose();
+                if (modalMesh.material) {
+                    if (Array.isArray(modalMesh.material)) {
+                        modalMesh.material.forEach(m => m.dispose());
+                    } else {
+                        modalMesh.material.dispose();
+                    }
+                }
+                modalMesh = null;
+            }
+
+            modalTitle.textContent = details.name;
+            modalDescription.textContent = details.description;
+            modalType.textContent = details.type || 'Geometría';
+
+            if (details.url) {
+                modalColorContainer.style.display = 'none';
+                if (details.loadedModel) {
+                    modalMesh = details.loadedModel.clone();
+                    fitModelToFrame(modalMesh, 3.5); // Ajustar tamaño para modal
+                    modalScene.add(modalMesh);
+                    setupModalCamera(modalMesh);
+                } else {
+                    modalDescription.textContent = "El modelo aún se está cargando...";
+                }
+            } else {
+                modalColorContainer.style.display = 'block';
+                modalColor.textContent = details.colorName || 'N/A';
+                const material = new THREE.MeshBasicMaterial({
+                    color: details.color,
+                    side: details.geometry instanceof THREE.RingGeometry ? THREE.DoubleSide : THREE.FrontSide
+                });
+                modalMesh = new THREE.Mesh(details.geometry.clone(), material);
+                modalScene.add(modalMesh);
+                setupModalCamera(modalMesh);
+            }
+
+            modal.classList.add('active');
+            onWindowResize();
+
+            if (!modalAnimationId) {
+                animateModal();
+            }
+        }
+
+        // --- Función auxiliar para ajustar la cámara del modal al objeto ---
+        function setupModalCamera(targetObject) {
+            // (Sin cambios)
+            const box = new THREE.Box3().setFromObject(targetObject);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = modalCamera.fov * (Math.PI / 180);
+            let cameraZ = Math.abs(maxDim / 1.5 / Math.tan(fov / 2));
+            cameraZ = Math.max(cameraZ, maxDim * 1.2);
+            modalCamera.position.set(center.x, center.y + size.y * 0.1, center.z + cameraZ);
+            modalControls.target.copy(center);
+            modalControls.update();
+        }
+
+
+        // --- Función para cerrar el Modal ---
+        function closeModal() {
+            // (Sin cambios)
+            modal.classList.remove('active');
+            if (modalAnimationId) {
+                cancelAnimationFrame(modalAnimationId);
+                modalAnimationId = null;
+            }
+            if (modalMesh) {
+                modalScene.remove(modalMesh);
+                try {
+                    if (modalMesh.geometry) modalMesh.geometry.dispose();
+                    if (modalMesh.material) {
+                        if (Array.isArray(modalMesh.material)) {
+                            modalMesh.material.forEach(m => m.dispose());
+                        } else {
+                            modalMesh.material.dispose();
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Error during modal mesh cleanup:", e);
+                }
+                modalMesh = null;
+            }
+        }
+
+        // --- Funciones de Paginación (displayPage, updatePaginationControls) ---
+        // (Sin cambios)
+        let currentCleanupFunctions = [];
+        function displayPage(page) {
+            currentPage = page;
+            gallery.innerHTML = '';
+            currentCleanupFunctions.forEach(cleanup => cleanup());
+            currentCleanupFunctions = [];
+            galleryScenes = [];
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageItems = objectDetails.slice(startIndex, endIndex);
+            pageItems.forEach(details => {
+                const cleanup = createGalleryCard(details);
+                currentCleanupFunctions.push(cleanup);
+            });
+            updatePaginationControls();
+            setTimeout(onWindowResize, 50);
+        }
+
+        function updatePaginationControls() {
+            paginationControls.innerHTML = '';
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Anterior';
+            prevButton.className = 'pagination-button';
+            prevButton.disabled = currentPage === 1;
+            prevButton.onclick = () => {
+                if (currentPage > 1) displayPage(currentPage - 1);
+            };
+            paginationControls.appendChild(prevButton);
+            for (let i = 1; i <= totalPages; i++) {
+                const pageNumberButton = document.createElement('button');
+                pageNumberButton.textContent = i;
+                pageNumberButton.className = 'pagination-number';
+                if (i === currentPage) {
+                    pageNumberButton.classList.add('active');
+                }
+                pageNumberButton.onclick = () => displayPage(i);
+                paginationControls.appendChild(pageNumberButton);
+            }
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Siguiente';
+            nextButton.className = 'pagination-button';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.onclick = () => {
+                if (currentPage < totalPages) displayPage(currentPage + 1);
+            };
+            paginationControls.appendChild(nextButton);
+        }
+
+        // --- Inicializar la escena del modal ---
+        initModalScene();
+
+        // --- Manejo del Redimensionamiento de la Ventana ---
+        function onWindowResize() {
+            // (Sin cambios)
+            galleryScenes.forEach(s => {
+                const { container, camera, renderer } = s;
+                const width = container.offsetWidth || 200;
+                const height = container.offsetHeight || 200;
+                if (width > 0 && height > 0 && renderer) {
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(width, height);
+                }
+            });
+            if (modal.classList.contains('active') && modalRenderer) {
+                const width = modalCanvasContainer.clientWidth;
+                const height = modalCanvasContainer.clientHeight;
+                if (width > 0 && height > 0) {
+                    modalCamera.aspect = width / height;
+                    modalCamera.updateProjectionMatrix();
+                    modalRenderer.setSize(width, height);
+                }
+            }
+        }
+
+        // Listener para el evento resize
+        window.addEventListener('resize', onWindowResize);
+
+        // Cerrar el modal si se hace clic fuera del contenido
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // --- Inicialización al cargar la página ---
+        displayPage(currentPage); // Mostrar la primera página inicialmente
+
+    </script>
+
+</body>
+
+</html>
